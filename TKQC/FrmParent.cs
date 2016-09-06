@@ -11,6 +11,7 @@ using System.Configuration;
 using System.Reflection;
 using System.Diagnostics;
 
+
 namespace TKQC
 {
     public partial class FrmParent : Form
@@ -29,6 +30,7 @@ namespace TKQC
         {
             InitializeComponent();
             UserName = txt_UserName;
+            shareArea.UserName = UserName;
         }
 
         //private void InitializeComponent()
@@ -101,6 +103,7 @@ namespace TKQC
                     if (type.Name == dtransaction.Rows[0][0].ToString())
                     {
                         Form frmShow = (Form)frmAssembly.CreateInstance(type.ToString());
+                        
                         // then when you want to close all of them simple call the below code
 
                         foreach (Form form in this.MdiChildren)
@@ -126,5 +129,7 @@ namespace TKQC
                 MyProcess[0].Kill(); //關閉執行中的程式
 
         }
+
+       
     }
 }
