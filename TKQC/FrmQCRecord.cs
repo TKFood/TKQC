@@ -8,7 +8,9 @@ using NPOI.SS.UserModel;
 using System.Configuration;
 using NPOI.XSSF.UserModel;
 using NPOI.SS.Util;
-
+using DocumentFormat.OpenXml;
+using System.Collections.Generic;
+using Aspose.Words;
 
 namespace TKQC
 {
@@ -144,5 +146,42 @@ namespace TKQC
         }
 
         #endregion
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            // 首先把建立的範本檔案讀入MemoryStream
+            //首先把建立的範本檔案讀入MemoryStream
+            System.IO.MemoryStream _memoryStream = new System.IO.MemoryStream(Properties.Resources.test);
+
+            //建立一個Document物件
+            //並傳入MemoryStream
+            Aspose.Words.Document doc = new Aspose.Words.Document(_memoryStream);
+
+            //新增一個DataTable
+            DataTable table = new DataTable();
+            //建立Column
+            table.Columns.Add("name");
+
+
+            //透過建立的DataTable物件來New一個儲存資料的Row
+            DataRow row = table.NewRow();
+            //這些Row具有上面所建立相同的Column欄位
+            //因此可以直接指定欄位名稱將資料填入裡面
+            row["name"] = "JJJJ 123 456";
+
+
+            //把所建立的資料行加入Table的Row清單內
+            table.Rows.Add(row);
+
+
+            //將DataTable傳入Document的MailMerge.Execute()方法
+            doc.MailMerge.Execute(table);
+            //清空所有未被合併的功能變數
+            doc.MailMerge.DeleteFields();
+            //將檔案儲存至c:\
+            doc.Save(@"C:\temp\test.doc");
+
+            MessageBox.Show("OK");
+        }
     }
 }
