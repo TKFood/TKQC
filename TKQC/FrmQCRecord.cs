@@ -112,7 +112,7 @@ namespace TKQC
 
 
 
-            sbSql.Clear();
+            sbSql.Clear(); 
             sbSqlQuery.Clear();
             sbSql.Append("SELECT [QCNO],[QCDATE],[CLIENT],[FACTORY],[DEP],[TEL],[Address],[MB001],[MB002],[MB003],[LOTNO],[MANU],[TYPE],[STATUS],[PROCESS],[REASON],[PROTECT],[RESULT] ");
             sbSql.Append(" FROM [TKQC].[dbo].[QCRECORD]");
