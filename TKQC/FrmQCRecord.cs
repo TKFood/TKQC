@@ -40,7 +40,7 @@ namespace TKQC
         {
             InitializeComponent();
             SetValue();
-
+            button4.Visible = false;
         }
 
         #region FUNCTION
@@ -446,11 +446,13 @@ namespace TKQC
         private void button5_Click(object sender, EventArgs e)
         {
             ClearText();
+            button4.Visible = true;
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
             ADDtoDB();
+            button4.Visible = false;
         }
 
         private void button6_Click(object sender, EventArgs e)
