@@ -75,6 +75,10 @@
             this.textBox15 = new System.Windows.Forms.TextBox();
             this.textBox16 = new System.Windows.Forms.TextBox();
             this.textBox17 = new System.Windows.Forms.TextBox();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -98,6 +102,8 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.tableLayoutPanel1.Controls.Add(this.button7, 7, 0);
+            this.tableLayoutPanel1.Controls.Add(this.button6, 6, 0);
             this.tableLayoutPanel1.Controls.Add(this.label20, 13, 1);
             this.tableLayoutPanel1.Controls.Add(this.label18, 14, 0);
             this.tableLayoutPanel1.Controls.Add(this.label17, 13, 0);
@@ -105,8 +111,6 @@
             this.tableLayoutPanel1.Controls.Add(this.label2, 10, 0);
             this.tableLayoutPanel1.Controls.Add(this.dateTimePicker1, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.button1, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.button2, 4, 0);
-            this.tableLayoutPanel1.Controls.Add(this.button3, 5, 0);
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.textBox1, 1, 4);
             this.tableLayoutPanel1.Controls.Add(this.label4, 0, 5);
@@ -144,6 +148,10 @@
             this.tableLayoutPanel1.Controls.Add(this.label9, 6, 7);
             this.tableLayoutPanel1.Controls.Add(this.textBox8, 4, 7);
             this.tableLayoutPanel1.Controls.Add(this.label8, 3, 7);
+            this.tableLayoutPanel1.Controls.Add(this.button4, 5, 0);
+            this.tableLayoutPanel1.Controls.Add(this.button5, 4, 0);
+            this.tableLayoutPanel1.Controls.Add(this.button2, 8, 0);
+            this.tableLayoutPanel1.Controls.Add(this.button3, 9, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -229,7 +237,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(323, 3);
+            this.button2.Location = new System.Drawing.Point(643, 3);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(72, 32);
             this.button2.TabIndex = 18;
@@ -239,7 +247,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(403, 3);
+            this.button3.Location = new System.Drawing.Point(723, 3);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(74, 34);
             this.button3.TabIndex = 19;
@@ -262,6 +270,7 @@
             this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox1.Location = new System.Drawing.Point(83, 169);
             this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
             this.textBox1.Size = new System.Drawing.Size(74, 22);
             this.textBox1.TabIndex = 21;
             // 
@@ -623,6 +632,54 @@
             this.textBox17.Size = new System.Drawing.Size(794, 34);
             this.textBox17.TabIndex = 58;
             // 
+            // button5
+            // 
+            this.button5.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button5.ForeColor = System.Drawing.Color.Blue;
+            this.button5.Location = new System.Drawing.Point(323, 3);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(64, 34);
+            this.button5.TabIndex = 59;
+            this.button5.Text = "新增";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // button4
+            // 
+            this.button4.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button4.ForeColor = System.Drawing.Color.Blue;
+            this.button4.Location = new System.Drawing.Point(403, 3);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(64, 34);
+            this.button4.TabIndex = 60;
+            this.button4.Text = "存檔";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // button6
+            // 
+            this.button6.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button6.ForeColor = System.Drawing.Color.Blue;
+            this.button6.Location = new System.Drawing.Point(483, 3);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(64, 34);
+            this.button6.TabIndex = 61;
+            this.button6.Text = "修改";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // button7
+            // 
+            this.button7.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button7.ForeColor = System.Drawing.Color.Blue;
+            this.button7.Location = new System.Drawing.Point(563, 3);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(64, 34);
+            this.button7.TabIndex = 62;
+            this.button7.Text = "刪除";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
             // FrmQCRecord
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -687,5 +744,9 @@
         private System.Windows.Forms.TextBox textBox16;
         private System.Windows.Forms.TextBox textBox15;
         private System.Windows.Forms.TextBox textBox14;
+        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button5;
     }
 }

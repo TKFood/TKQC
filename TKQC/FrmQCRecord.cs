@@ -28,7 +28,8 @@ namespace TKQC
         DataSet ds = new DataSet();
 
         DataTable dt = new DataTable();
-
+        int result;
+        int rownum=0;
 
         public void SetValue()
         {
@@ -116,7 +117,7 @@ namespace TKQC
 
             sbSql.Clear(); 
             sbSqlQuery.Clear();
-            sbSql.Append("SELECT [QCNO],[QCDATE],[CLIENT],[FACTORY],[DEP],[TEL],[Address],[MB001],[MB002],[MB003],[LOTNO],[MANU],[TYPE],[STATUS],[PROCESS],[REASON],[PROTECT],[RESULT] ");
+            sbSql.Append("SELECT  [QCNO] AS '編號' ,[QCDATE] AS '受理日期',[CLIENT] AS '客戶',[FACTORY] AS '廠商',[DEP] AS '部門',[TEL] AS '電話',[Address] AS '地址',[MB001] AS '品號',[MB002] AS '品名',[MB003] AS '規格',[LOTNO] AS '料號/批號',[MANU] AS '線別',[TYPE] AS '使用範圍',[STATUS] AS '異常情況/應急對策',[PROCESS] AS '處理方式',[REASON] AS '原因分析',[PROTECT] AS '預防對策',[RESULT] AS '確認結果'");
             sbSql.Append(" FROM [TKQC].[dbo].[QCRECORD]");
             sbSql.AppendFormat(" WHERE CONVERT(varchar(6),[QCDATE],112)='{0}'",dateTimePicker1.Value.ToString("yyyyMM") );
             sbSql.Append(" ");
@@ -146,7 +147,21 @@ namespace TKQC
             //新增一個DataTable
             DataTable table = new DataTable();
             //建立Column
+            table.Columns.Add("QCNO");
             table.Columns.Add("name");
+            table.Columns.Add("QCDATE");
+            table.Columns.Add("TEL");
+            table.Columns.Add("Address");
+            table.Columns.Add("MB001");
+            table.Columns.Add("LOTNO");
+            table.Columns.Add("MANU");
+            table.Columns.Add("TYPE");
+            table.Columns.Add("STATUS");
+            table.Columns.Add("PROCESS");
+            table.Columns.Add("REASON");
+            table.Columns.Add("PROTECT");
+            table.Columns.Add("RESULT");
+
 
 
             //透過建立的DataTable物件來New一個儲存資料的Row
@@ -164,8 +179,9 @@ namespace TKQC
             row["TYPE"] = textBox12.Text.ToString();
             row["STATUS"] = textBox13.Text.ToString();
             row["PROCESS"] = textBox14.Text.ToString();
-            row["PROTECT"] = textBox15.Text.ToString();
-            row["RESULT"] = textBox16.Text.ToString();
+            row["REASON"] = textBox15.Text.ToString();
+            row["PROTECT"] = textBox16.Text.ToString();
+            row["RESULT"] = textBox17.Text.ToString();
 
             //把所建立的資料行加入Table的Row清單內
             table.Rows.Add(row);
@@ -175,12 +191,31 @@ namespace TKQC
             doc.MailMerge.Execute(table);
             //清空所有未被合併的功能變數
             doc.MailMerge.DeleteFields();
+
+            if (Directory.Exists(@"c:\temp\"))
+            {
+                //資料夾存在
+            }
+            else
+            {
+                //新增資料夾
+                Directory.CreateDirectory(@"c:\temp\");
+            }
             //將檔案儲存至c:\
             StringBuilder filename = new StringBuilder();
             filename.AppendFormat(@"c:\temp\品質異常處理單{0}.doc", DateTime.Now.ToString("yyyyMMdd"));
             doc.Save(filename.ToString());
 
-            MessageBox.Show("OK");
+            MessageBox.Show("匯出完成-文件放在-" + filename.ToString());
+            FileInfo fi = new FileInfo(filename.ToString());
+            if (fi.Exists)
+            {
+                System.Diagnostics.Process.Start(filename.ToString());
+            }
+            else
+            {
+                //file doesn't exist
+            }
 
         }
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
@@ -208,6 +243,188 @@ namespace TKQC
             }
             
         }
+
+        public void ADDtoDB()
+        {
+            try
+            {
+
+                connectionString = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
+                sqlConn = new SqlConnection(connectionString);
+
+                sqlConn.Close();
+                sqlConn.Open();
+                tran = sqlConn.BeginTransaction();
+
+                sbSql.Clear();
+
+                sbSql.AppendFormat(" INSERT INTO  [{0}].[dbo].[QCRECORD] ([QCNO],[QCDATE],[CLIENT],[FACTORY],[DEP],[TEL],[Address],[MB001],[MB002],[MB003],[LOTNO],[MANU],[TYPE],[STATUS],[PROCESS],[REASON],[PROTECT],[RESULT])  VALUES ('{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}','{13}','{14}','{15}','{16}','{17}','{18}') ", sqlConn.Database.ToString(), textBox1.Text.ToString(), dateTimePicker2.Value.ToString("yyyy/MM/dd"), textBox2.Text.ToString(), textBox3.Text.ToString(), textBox4.Text.ToString(), textBox5.Text.ToString(), textBox6.Text.ToString(), textBox7.Text.ToString(), textBox8.Text.ToString(), textBox9.Text.ToString(), textBox10.Text.ToString(), textBox11.Text.ToString(), textBox12.Text.ToString(), textBox13.Text.ToString(), textBox14.Text.ToString(), textBox15.Text.ToString(), textBox16.Text.ToString(), textBox17.Text.ToString());
+                //sbSql.AppendFormat("  UPDATE Member SET Cname='{1}',Mobile1='{2}' WHERE ID='{0}' ", list_Member[0].ID.ToString(), list_Member[0].Cname.ToString(), list_Member[0].Mobile1.ToString());
+
+                cmd.Connection = sqlConn;
+                cmd.CommandTimeout = 60;
+                cmd.CommandText = sbSql.ToString();
+                cmd.Transaction = tran;
+                result = cmd.ExecuteNonQuery();
+
+                if (result == 0)
+                {
+                    tran.Rollback();    //交易取消
+                }
+                else
+                {
+                    tran.Commit();      //執行交易
+
+                }
+
+                sqlConn.Close();
+
+                rownum = dataGridView1.RowCount;
+                Search();
+
+
+            }
+            catch
+            {
+
+            }
+
+            finally
+            {
+                sqlConn.Close();
+            }
+
+        }
+
+        public void UpdateDB()
+        {
+            textBox1.ReadOnly = true;
+            try
+            {
+                DialogResult dialogResult = MessageBox.Show("是否真的要更新", "UPDATE?", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    connectionString = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
+                    sqlConn = new SqlConnection(connectionString);
+
+                    sqlConn.Close();
+                    sqlConn.Open();
+                    tran = sqlConn.BeginTransaction();
+
+                    sbSql.Clear();
+                   
+
+                    sbSql.AppendFormat("UPDATE [{0}].dbo.[QCRECORD]   SET [QCDATE]='{2}',[CLIENT]='{3}',[FACTORY]='{4}',[DEP]='{5}',[TEL]='{6}',[Address]='{7}',[MB001]='{8}',[MB002]='{9}',[MB003]='{10}',[LOTNO]='{11}',[MANU]='{12}',[TYPE]='{13}',[STATUS]='{14}',[PROCESS]='{15}',[REASON]='{16}',[PROTECT]='{17}',[RESULT]='{18}' WHERE [QCNO]='{1}' ", sqlConn.Database.ToString(), textBox1.Text.ToString(), dateTimePicker1.Value.ToString("yyyy/MM/dd"), textBox2.Text.ToString(), textBox3.Text.ToString(), textBox4.Text.ToString(), textBox5.Text.ToString(), textBox6.Text.ToString(), textBox7.Text.ToString(), textBox8.Text.ToString(), textBox9.Text.ToString(), textBox10.Text.ToString(), textBox11.Text.ToString(), textBox12.Text.ToString(), textBox13.Text.ToString(), textBox14.Text.ToString(), textBox15.Text.ToString(), textBox16.Text.ToString(), textBox17.Text.ToString());                  
+
+                    cmd.Connection = sqlConn;
+                    cmd.CommandTimeout = 60;
+                    cmd.CommandText = sbSql.ToString();
+                    cmd.Transaction = tran;
+                    result = cmd.ExecuteNonQuery();
+
+                    if (result == 0)
+                    {
+                        tran.Rollback();    //交易取消
+                    }
+                    else
+                    {
+                        tran.Commit();      //執行交易
+                    }
+
+                    sqlConn.Close();
+
+                    Search();
+                }
+
+            }
+            catch
+            {
+
+            }
+
+            finally
+            {
+                sqlConn.Close();
+            }
+        }
+
+        public void ClearText()
+        {
+            textBox1.ReadOnly = false;
+            textBox1.Text = null;
+            textBox2.Text = null;
+            textBox3.Text = null;
+            textBox4.Text = null;
+            textBox5.Text = null;
+            textBox6.Text = null;
+            textBox7.Text = null;
+            textBox8.Text = null;
+            textBox9.Text = null;
+            textBox10.Text = null;
+            textBox11.Text = null;
+            textBox12.Text = null;
+            textBox13.Text = null;
+            textBox14.Text = null;
+            textBox15.Text = null;
+            textBox16.Text = null;
+            textBox17.Text = null;
+            dateTimePicker2.Value = DateTime.Now;
+
+        }
+        public void DelDB()
+        {
+            textBox1.ReadOnly = true;
+            try
+            {
+                textBox1.Text = dataGridView1.Rows[dataGridView1.CurrentRow.Index].Cells[0].Value.ToString();
+                DialogResult dialogResult = MessageBox.Show("是否真的要刪除", "del?", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    connectionString = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
+                    sqlConn = new SqlConnection(connectionString);
+
+                    sqlConn.Close();
+                    sqlConn.Open();
+                    tran = sqlConn.BeginTransaction();
+
+                    sbSql.Clear();
+                    //sbSql.Append("UPDATE Member SET Cname='009999',Mobile1='009999',Telphone='',Email='',Address='',Sex='',Birthday='' WHERE ID='009999'");
+
+                    sbSql.AppendFormat("DELETE [{0}].dbo.[QCRECORD] WHERE [QCNO]='{1}' ", sqlConn.Database.ToString(), textBox1.Text.ToString());
+                    //sbSql.AppendFormat("  UPDATE Member SET Cname='{1}',Mobile1='{2}' WHERE ID='{0}' ", list_Member[0].ID.ToString(), list_Member[0].Cname.ToString(), list_Member[0].Mobile1.ToString());
+
+                    cmd.Connection = sqlConn;
+                    cmd.CommandTimeout = 60;
+                    cmd.CommandText = sbSql.ToString();
+                    cmd.Transaction = tran;
+                    result = cmd.ExecuteNonQuery();
+
+                    if (result == 0)
+                    {
+                        tran.Rollback();    //交易取消
+                    }
+                    else
+                    {
+                        tran.Commit();      //執行交易
+                    }
+
+                    sqlConn.Close();
+
+                    Search();
+                }
+
+            }
+            catch
+            {
+
+            }
+
+            finally
+            {
+                sqlConn.Close();
+            }
+
+        }
         #endregion
 
         #region BUTTON   
@@ -221,13 +438,33 @@ namespace TKQC
             //ExportExcel(ds, NowTable);
         }
 
-        #endregion
-
         private void button3_Click(object sender, EventArgs e)
         {
             PRINTDOC();
         }
 
-      
+        private void button5_Click(object sender, EventArgs e)
+        {
+            ClearText();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            ADDtoDB();
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            UpdateDB();
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            DelDB();
+        }
+
+        #endregion
+
+
     }
 }
