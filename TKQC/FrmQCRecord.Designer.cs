@@ -51,8 +51,6 @@
             this.label14 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
@@ -105,8 +103,6 @@
             this.tableLayoutPanel1.Controls.Add(this.button7, 7, 0);
             this.tableLayoutPanel1.Controls.Add(this.button6, 6, 0);
             this.tableLayoutPanel1.Controls.Add(this.label20, 13, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label18, 14, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label17, 13, 0);
             this.tableLayoutPanel1.Controls.Add(this.dataGridView1, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.label2, 10, 0);
             this.tableLayoutPanel1.Controls.Add(this.dateTimePicker1, 1, 0);
@@ -176,7 +172,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(984, 733);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1084, 837);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // dataGridView1
@@ -403,26 +399,6 @@
             this.label16.Size = new System.Drawing.Size(74, 12);
             this.label16.TabIndex = 34;
             this.label16.Text = "預防對策";
-            // 
-            // label17
-            // 
-            this.label17.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(1043, 14);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(74, 12);
-            this.label17.TabIndex = 35;
-            this.label17.Text = "label17";
-            // 
-            // label18
-            // 
-            this.label18.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(1123, 14);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(74, 12);
-            this.label18.TabIndex = 36;
-            this.label18.Text = "label18";
             // 
             // label19
             // 
@@ -684,7 +660,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(984, 733);
+            this.ClientSize = new System.Drawing.Size(1084, 837);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "FrmQCRecord";
             this.Text = "FrmQCRecord";
@@ -708,8 +684,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
