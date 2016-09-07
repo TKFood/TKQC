@@ -132,6 +132,82 @@ namespace TKQC
 
             sqlConn.Close();
         }
+
+        public void PRINTDOC()
+        {
+            // 首先把建立的範本檔案讀入MemoryStream
+            //首先把建立的範本檔案讀入MemoryStream
+            System.IO.MemoryStream _memoryStream = new System.IO.MemoryStream(Properties.Resources.品質異常處理單);
+
+            //建立一個Document物件
+            //並傳入MemoryStream
+            Aspose.Words.Document doc = new Aspose.Words.Document(_memoryStream);
+
+            //新增一個DataTable
+            DataTable table = new DataTable();
+            //建立Column
+            table.Columns.Add("name");
+
+
+            //透過建立的DataTable物件來New一個儲存資料的Row
+            DataRow row = table.NewRow();
+            //這些Row具有上面所建立相同的Column欄位
+            //因此可以直接指定欄位名稱將資料填入裡面       
+            row["QCNO"] = textBox1.Text.ToString();
+            row["name"] = textBox2.Text.ToString() + textBox3.Text.ToString() + textBox4.Text.ToString();
+            row["QCDATE"] = dateTimePicker1.Value.ToString("yyyy/MM/dd");
+            row["TEL"] = textBox5.Text.ToString();
+            row["Address"] = textBox6.Text.ToString();
+            row["MB001"] = textBox7.Text.ToString() + textBox8.Text.ToString() + textBox9.Text.ToString();
+            row["LOTNO"] = textBox10.Text.ToString();
+            row["MANU"] = textBox11.Text.ToString();
+            row["TYPE"] = textBox12.Text.ToString();
+            row["STATUS"] = textBox13.Text.ToString();
+            row["PROCESS"] = textBox14.Text.ToString();
+            row["PROTECT"] = textBox15.Text.ToString();
+            row["RESULT"] = textBox16.Text.ToString();
+
+            //把所建立的資料行加入Table的Row清單內
+            table.Rows.Add(row);
+
+
+            //將DataTable傳入Document的MailMerge.Execute()方法
+            doc.MailMerge.Execute(table);
+            //清空所有未被合併的功能變數
+            doc.MailMerge.DeleteFields();
+            //將檔案儲存至c:\
+            StringBuilder filename = new StringBuilder();
+            filename.AppendFormat(@"c:\temp\品質異常處理單{0}.doc", DateTime.Now.ToString("yyyyMMdd"));
+            doc.Save(filename.ToString());
+
+            MessageBox.Show("OK");
+
+        }
+        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        {
+            if(dataGridView1.Rows.Count>=1)
+            {
+                textBox1.Text = dataGridView1.CurrentRow.Cells[0].Value.ToString();
+                textBox2.Text = dataGridView1.CurrentRow.Cells[2].Value.ToString();
+                textBox3.Text = dataGridView1.CurrentRow.Cells[3].Value.ToString();
+                textBox4.Text = dataGridView1.CurrentRow.Cells[4].Value.ToString();
+                textBox5.Text = dataGridView1.CurrentRow.Cells[5].Value.ToString();
+                textBox6.Text = dataGridView1.CurrentRow.Cells[6].Value.ToString();
+                textBox7.Text = dataGridView1.CurrentRow.Cells[7].Value.ToString();
+                textBox8.Text = dataGridView1.CurrentRow.Cells[8].Value.ToString();
+                textBox9.Text = dataGridView1.CurrentRow.Cells[9].Value.ToString();
+                textBox10.Text = dataGridView1.CurrentRow.Cells[10].Value.ToString();
+                textBox11.Text = dataGridView1.CurrentRow.Cells[11].Value.ToString();
+                textBox12.Text = dataGridView1.CurrentRow.Cells[12].Value.ToString();
+                textBox13.Text = dataGridView1.CurrentRow.Cells[13].Value.ToString();
+                textBox14.Text = dataGridView1.CurrentRow.Cells[14].Value.ToString();
+                textBox15.Text = dataGridView1.CurrentRow.Cells[15].Value.ToString();
+                textBox16.Text = dataGridView1.CurrentRow.Cells[16].Value.ToString();
+                textBox17.Text = dataGridView1.CurrentRow.Cells[17].Value.ToString();
+                dateTimePicker2.Value = Convert.ToDateTime(dataGridView1.CurrentRow.Cells[1].Value.ToString());
+            }
+            
+        }
         #endregion
 
         #region BUTTON   
@@ -149,39 +225,9 @@ namespace TKQC
 
         private void button3_Click(object sender, EventArgs e)
         {
-            // 首先把建立的範本檔案讀入MemoryStream
-            //首先把建立的範本檔案讀入MemoryStream
-            System.IO.MemoryStream _memoryStream = new System.IO.MemoryStream(Properties.Resources.test);
-
-            //建立一個Document物件
-            //並傳入MemoryStream
-            Aspose.Words.Document doc = new Aspose.Words.Document(_memoryStream);
-
-            //新增一個DataTable
-            DataTable table = new DataTable();
-            //建立Column
-            table.Columns.Add("name");
-
-
-            //透過建立的DataTable物件來New一個儲存資料的Row
-            DataRow row = table.NewRow();
-            //這些Row具有上面所建立相同的Column欄位
-            //因此可以直接指定欄位名稱將資料填入裡面
-            row["name"] = "JJJJ 123 456";
-
-
-            //把所建立的資料行加入Table的Row清單內
-            table.Rows.Add(row);
-
-
-            //將DataTable傳入Document的MailMerge.Execute()方法
-            doc.MailMerge.Execute(table);
-            //清空所有未被合併的功能變數
-            doc.MailMerge.DeleteFields();
-            //將檔案儲存至c:\
-            doc.Save(@"C:\temp\test.doc");
-
-            MessageBox.Show("OK");
+            PRINTDOC();
         }
+
+      
     }
 }

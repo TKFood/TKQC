@@ -63,9 +63,9 @@ namespace TKQC.Properties {
         /// <summary>
         ///   查詢類型 System.Byte[] 的當地語系化資源。
         /// </summary>
-        internal static byte[] test {
+        internal static byte[] 品質異常處理單 {
             get {
-                object obj = ResourceManager.GetObject("test", resourceCulture);
+                object obj = ResourceManager.GetObject("品質異常處理單", resourceCulture);
                 return ((byte[])(obj));
             }
         }

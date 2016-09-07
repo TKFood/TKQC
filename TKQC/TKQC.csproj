@@ -118,7 +118,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="Resources\test.doc" />
+    <None Include="Resources\品質異常處理單.doc" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
