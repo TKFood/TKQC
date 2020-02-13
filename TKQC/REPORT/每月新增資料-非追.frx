@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="02/13/2020 16:34:34" ReportInfo.Modified="02/13/2020 16:37:50" ReportInfo.CreatorVersion="2016.4.4.0">
+  <Dictionary>
+    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqHwzMSgwTFaHpjtG3vsOj8Zy6q+uhwpDsytgWqwZQZyEQUQyQ022aWUGqU90pHzzNjHuzu89K+RQ2LIBVx1fpgNkNJhwC4eetn2/Uy0fMrO7zDUE5AmRb+0bcYI+lxqpNK7VAg28EMb2zujBtCWMs8uR7KE3TT1XHtlPqNg0WX9KIqj1ey0MEJnT2ffArdePJ">
+      <TableDataSource Name="Table" DataType="System.Int32" Enabled="true" SelectCommand="SELECT MA001 AS ID,MA002 AS NAME&#13;&#10;FROM [TK].dbo.COPMA&#13;&#10;WHERE CREATE_DATE&gt;='20200101' AND  CREATE_DATE&gt;='20200131'&#13;&#10;AND MA001 NOT LIKE '1%'">
+        <Column Name="ID" DataType="System.String"/>
+        <Column Name="NAME" DataType="System.String"/>
+      </TableDataSource>
+    </MsSqlDataConnection>
+  </Dictionary>
+  <ReportPage Name="Page1">
+    <ColumnHeaderBand Name="ColumnHeader1" Width="718.2" Height="19.86">
+      <TextObject Name="Text2" Top="-0.04" Width="132.3" Height="18.9" Border.Lines="All" Text="代號" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text4" Left="132.3" Width="378" Height="18.9" Border.Lines="All" Text="名稱" HorzAlign="Center" VertAlign="Center"/>
+    </ColumnHeaderBand>
+    <DataBand Name="Data1" Top="23.71" Width="718.2" Height="18.9" DataSource="Table">
+      <TextObject Name="Text1" Top="-0.04" Width="132.3" Height="18.9" Border.Lines="All" Text="[Table.ID]" VertAlign="Center"/>
+      <TextObject Name="Text3" Left="132.3" Width="378" Height="18.9" Border.Lines="All" Text="[Table.NAME]" HorzAlign="Center" VertAlign="Center"/>
+    </DataBand>
+  </ReportPage>
+</Report>

@@ -40,7 +40,7 @@ namespace TKQC
 
             SQL1 = SETSQL1();
             Report report1 = new Report();
-            report1.Load(@"REPORT\??.frx");
+            report1.Load(@"REPORT\每月新增資料-非追.frx");
 
             report1.Dictionary.Connections[0].ConnectionString = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
             TableDataSource table = report1.GetDataSource("Table") as TableDataSource;
@@ -54,8 +54,35 @@ namespace TKQC
         {
             StringBuilder SB = new StringBuilder();
 
+            if(comboBox1.Text.Equals("客戶"))
+            {
+                SB.AppendFormat(@"  SELECT MA001 AS ID,MA002 AS NAME");
+                SB.AppendFormat(@"  FROM [TK].dbo.COPMA");
+                SB.AppendFormat(@"  WHERE CREATE_DATE>='{0}' AND  CREATE_DATE>='{1}'",dateTimePicker1.Value.ToString("yyyyMMdd"), dateTimePicker2.Value.ToString("yyyyMMdd"));
+                SB.AppendFormat(@"  AND MA001 NOT LIKE '1%'");
+                SB.AppendFormat(@"  ");
+                SB.AppendFormat(@"  ");
+            }
+            else if (comboBox1.Text.Equals("供應商"))
+            {
+                SB.AppendFormat(@"  SELECT MA001 AS ID,MA002 AS NAME");
+                SB.AppendFormat(@"  FROM [TK].dbo.PURMA");
+                SB.AppendFormat(@"  WHERE CREATE_DATE>='{0}' AND  CREATE_DATE>='{1}'", dateTimePicker1.Value.ToString("yyyyMMdd"), dateTimePicker2.Value.ToString("yyyyMMdd"));
+                SB.AppendFormat(@"  ");
+                SB.AppendFormat(@"  ");
+                SB.AppendFormat(@"  ");
+            }
+            else if (comboBox1.Text.Equals("品號"))
+            {
+                SB.AppendFormat(@"  SELECT MB001 AS ID,MB002 AS NAME");
+                SB.AppendFormat(@"  FROM [TK].dbo.INVMB");
+                SB.AppendFormat(@"  WHERE CREATE_DATE>='{0}' AND  CREATE_DATE>='{1}'", dateTimePicker1.Value.ToString("yyyyMMdd"), dateTimePicker2.Value.ToString("yyyyMMdd"));
+                SB.AppendFormat(@"  AND MB001 LIKE '4%'");
+                SB.AppendFormat(@"  ");
+                SB.AppendFormat(@"  ");
+            }
             SB.AppendFormat(@"  ");
-            SB.AppendFormat(@"   ");
+            SB.AppendFormat(@"  ");
             SB.AppendFormat(@"  ");
 
 
