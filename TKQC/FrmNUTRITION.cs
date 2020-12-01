@@ -32,11 +32,14 @@ namespace TKQC
         SqlCommand cmd = new SqlCommand();
         DataSet ds1 = new DataSet();
 
+        string ID;
+
         public FrmNUTRITION()
         {
             InitializeComponent();
 
             comboBox1load();
+            comboBox1load2();
         }
 
         #region FUNCTION
@@ -56,6 +59,27 @@ namespace TKQC
             comboBox1.DataSource = dt.DefaultView;
             comboBox1.ValueMember = "NAME";
             comboBox1.DisplayMember = "NAME";
+            sqlConn.Close();
+
+
+        }
+
+        public void comboBox1load2()
+        {
+            connectionString = ConfigurationManager.ConnectionStrings["dberp"].ConnectionString;
+            sqlConn = new SqlConnection(connectionString);
+            StringBuilder Sequel = new StringBuilder();
+            Sequel.AppendFormat(@"SELECT  [ID],[NAME] FROM [TKQC].[dbo].[NUTRITIONTYPE] ORDER BY ID ");
+            SqlDataAdapter da = new SqlDataAdapter(Sequel.ToString(), sqlConn);
+            DataTable dt = new DataTable();
+            sqlConn.Open();
+
+            dt.Columns.Add("NAME", typeof(string));
+
+            da.Fill(dt);
+            comboBox2.DataSource = dt.DefaultView;
+            comboBox2.ValueMember = "NAME";
+            comboBox2.DisplayMember = "NAME";
             sqlConn.Close();
 
 
@@ -136,6 +160,64 @@ namespace TKQC
                 sqlConn.Close();
             }
         }
+        private void dataGridView2_SelectionChanged(object sender, EventArgs e)
+        {
+            SETTEXTBOXNULL1();
+
+            if (dataGridView2.CurrentRow != null)
+            {
+                int rowindex = dataGridView2.CurrentRow.Index;
+                if (rowindex >= 0)
+                {
+                    DataGridViewRow row = dataGridView2.Rows[rowindex];
+
+                    ID = row.Cells["ID"].Value.ToString();
+                    comboBox2.Text= row.Cells["類別"].Value.ToString();
+                    textBox211.Text = row.Cells["品號"].Value.ToString();
+                    textBox212.Text = row.Cells["品名"].Value.ToString();
+                    textBox221.Text = row.Cells["熱量Kcal/100g"].Value.ToString();
+                    textBox222.Text = row.Cells["脂肪g/100g"].Value.ToString();
+                    textBox223.Text = row.Cells["飽和脂肪g/100g"].Value.ToString();
+                    textBox224.Text = row.Cells["反式脂肪g/100g"].Value.ToString();
+                    textBox231.Text = row.Cells["膽固醇mg/100g"].Value.ToString();
+                    textBox232.Text = row.Cells["鈉mg/100g"].Value.ToString();
+                    textBox233.Text = row.Cells["碳水化合物g/100g"].Value.ToString();
+                    textBox234.Text = row.Cells["膳食纖維g/100g"].Value.ToString();
+                    textBox241.Text = row.Cells["糖g/100g"].Value.ToString();
+                    textBox242.Text = row.Cells["添加糖g/100g"].Value.ToString();
+                    textBox243.Text = row.Cells["蛋白質g/100g"].Value.ToString();
+                    textBox244.Text = row.Cells["維生素D mcg/100g"].Value.ToString();
+                    textBox251.Text = row.Cells["鈣 mg/100g"].Value.ToString();
+                    textBox252.Text = row.Cells["鐵mg/100g"].Value.ToString();
+                    textBox253.Text = row.Cells["鉀mg/100g"].Value.ToString();
+                }
+                else
+                {
+                    
+                }
+            }
+        }
+
+        public void SETTEXTBOXNULL1()
+        {
+            textBox211.Text = null;
+            textBox212.Text = null;
+            textBox221.Text = null;
+            textBox222.Text = null;
+            textBox223.Text = null;
+            textBox224.Text = null;
+            textBox231.Text = null;
+            textBox232.Text = null;
+            textBox233.Text = null;
+            textBox234.Text = null;
+            textBox241.Text = null;
+            textBox242.Text = null;
+            textBox243.Text = null;
+            textBox244.Text = null;
+            textBox251.Text = null;
+            textBox252.Text = null;
+            textBox253.Text = null;
+        }
 
         #endregion
 
@@ -146,5 +228,7 @@ namespace TKQC
         }
 
         #endregion
+
+        
     }
 }
