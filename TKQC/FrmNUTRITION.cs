@@ -901,7 +901,7 @@ namespace TKQC
                 {
                     DataGridViewRow row = dataGridView3.Rows[rowindex];
 
-                    textBox2.Text = row.Cells["成品編號"].Value.ToString();
+                    textBox2.Text = row.Cells["ID"].Value.ToString();
                     textBox3.Text = row.Cells["原料編號"].Value.ToString();
                     textBox4.Text = row.Cells["添加量"].Value.ToString();
                     comboBox5.Text = row.Cells["原料名"].Value.ToString();
