@@ -42,6 +42,7 @@ namespace TKQC
             comboBox1load();
             comboBox1load2();
             comboBox1load3();
+            comboBox1load4();
         }
 
         #region FUNCTION
@@ -76,6 +77,7 @@ namespace TKQC
             DataTable dt = new DataTable();
             sqlConn.Open();
 
+            dt.Columns.Add("ID", typeof(string));
             dt.Columns.Add("NAME", typeof(string));
 
             da.Fill(dt);
@@ -97,12 +99,35 @@ namespace TKQC
             DataTable dt = new DataTable();
             sqlConn.Open();
 
+            dt.Columns.Add("ID", typeof(string));
             dt.Columns.Add("NAME", typeof(string));
 
             da.Fill(dt);
             comboBox3.DataSource = dt.DefaultView;
             comboBox3.ValueMember = "NAME";
             comboBox3.DisplayMember = "NAME";
+            sqlConn.Close();
+
+
+        }
+
+        public void comboBox1load4()
+        {
+            connectionString = ConfigurationManager.ConnectionStrings["dberp"].ConnectionString;
+            sqlConn = new SqlConnection(connectionString);
+            StringBuilder Sequel = new StringBuilder();
+            Sequel.AppendFormat(@"SELECT  [ID],[NAME] FROM [TKQC].[dbo].[NUTRITIONTYPE] ORDER BY ID ");
+            SqlDataAdapter da = new SqlDataAdapter(Sequel.ToString(), sqlConn);
+            DataTable dt = new DataTable();
+            sqlConn.Open();
+
+            dt.Columns.Add("ID", typeof(string));
+            dt.Columns.Add("NAME", typeof(string));
+
+            da.Fill(dt);
+            comboBox4.DataSource = dt.DefaultView;
+            comboBox4.ValueMember = "ID";
+            comboBox4.DisplayMember = "NAME";
             sqlConn.Close();
 
 
@@ -397,7 +422,7 @@ namespace TKQC
 
 
                 sbSql.AppendFormat(@"  
-                                    SELECT MAX([ID])+1  AS 'ID' FROM [TKQC].[dbo].[NUTRITIONBASE]
+                                    SELECT ISNULL(MAX([ID])+1,1)  AS 'ID' FROM [TKQC].[dbo].[NUTRITIONBASE]
                                     ");
 
                 adapter1 = new SqlDataAdapter(@"" + sbSql, sqlConn);
@@ -624,6 +649,216 @@ namespace TKQC
         }
 
 
+        public void SERACHNUTRITIONPROD(string MB002)
+        {
+            SqlDataAdapter adapter1 = new SqlDataAdapter();
+            SqlCommandBuilder sqlCmdBuilder1 = new SqlCommandBuilder();
+            DataSet ds1 = new DataSet();
+
+            try
+            {
+                connectionString = ConfigurationManager.ConnectionStrings["dberp"].ConnectionString;
+                sqlConn = new SqlConnection(connectionString);
+
+                sbSql.Clear();
+
+                if(!string.IsNullOrEmpty(MB002))
+                {
+                    sbSql.AppendFormat(@"
+                                    SELECT[PRODID] AS '成品編號' ,[PRODNAME]
+                                    AS '成品名' 
+                                    FROM[TKQC].[dbo].[NUTRITIONPROD]
+                                    WHERE([PRODID] LIKE '%{0}%' OR[PRODNAME] LIKE '%{0}%')
+                                    GROUP BY[PRODID],[PRODNAME]
+                                    ", MB002);
+                }
+                else
+                {
+                    sbSql.AppendFormat(@"
+                                    SELECT[PRODID] AS '成品編號' ,[PRODNAME]
+                                    AS '成品名' 
+                                    FROM[TKQC].[dbo].[NUTRITIONPROD]
+                                    GROUP BY[PRODID],[PRODNAME]
+                                    ");
+                }
+               
+
+                adapter1 = new SqlDataAdapter(@"" + sbSql, sqlConn);
+
+                sqlCmdBuilder1 = new SqlCommandBuilder(adapter1);
+                sqlConn.Open();
+                ds1.Clear();
+                adapter1.Fill(ds1, "TEMPds1");
+                sqlConn.Close();
+
+
+                if (ds1.Tables["TEMPds1"].Rows.Count == 0)
+                {
+                    dataGridView1.DataSource = null;
+                }
+                else
+                {
+                    if (ds1.Tables["TEMPds1"].Rows.Count >= 1)
+                    {
+                        //dataGridView1.Rows.Clear();
+                        dataGridView1.DataSource = ds1.Tables["TEMPds1"];
+                        dataGridView1.AutoResizeColumns();
+                        //dataGridView1.CurrentCell = dataGridView1[0, rownum];
+
+                    }
+                }
+
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+                sqlConn.Close();
+            }
+        }
+
+        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        {
+            string PRODID = null;
+
+            if (dataGridView1.CurrentRow != null)
+            {
+                int rowindex = dataGridView1.CurrentRow.Index;
+                if (rowindex >= 0)
+                {
+                    DataGridViewRow row = dataGridView1.Rows[rowindex];
+
+                    PRODID = row.Cells["成品編號"].Value.ToString();
+                    SERACHNUTRITIONPROD2(PRODID);
+                }
+                else
+                {
+
+                }
+            }
+        }
+
+        public void SERACHNUTRITIONPROD2(string PRODID)
+        {
+            SqlDataAdapter adapter1 = new SqlDataAdapter();
+            SqlCommandBuilder sqlCmdBuilder1 = new SqlCommandBuilder();
+            DataSet ds1 = new DataSet();
+
+            try
+            {
+                connectionString = ConfigurationManager.ConnectionStrings["dberp"].ConnectionString;
+                sqlConn = new SqlConnection(connectionString);
+
+                sbSql.Clear();
+
+                sbSql.AppendFormat(@"
+                                   
+                                    SELECT  
+                                    [PRODID] AS '成品編號'
+                                    ,[PRODNAME] AS '成品名'
+                                    ,[MB001] AS '原料編號'
+                                    ,[MB002] AS '原料名'
+                                    ,[USEDANOUNT] AS '添加量'
+                                    ,[ID]
+                                    FROM [TKQC].[dbo].[NUTRITIONPROD]
+                                    WHERE [PRODID]='{0}'
+                                    ORDER BY [PRODID],[MB001]
+                                    ", PRODID);
+
+
+                adapter1 = new SqlDataAdapter(@"" + sbSql, sqlConn);
+
+                sqlCmdBuilder1 = new SqlCommandBuilder(adapter1);
+                sqlConn.Open();
+                ds1.Clear();
+                adapter1.Fill(ds1, "TEMPds1");
+                sqlConn.Close();
+
+
+                if (ds1.Tables["TEMPds1"].Rows.Count == 0)
+                {
+                    dataGridView3.DataSource = null;
+                }
+                else
+                {
+                    if (ds1.Tables["TEMPds1"].Rows.Count >= 1)
+                    {
+                        //dataGridView1.Rows.Clear();
+                        dataGridView3.DataSource = ds1.Tables["TEMPds1"];
+                        dataGridView3.AutoResizeColumns();
+                        //dataGridView1.CurrentCell = dataGridView1[0, rownum];
+
+                    }
+                }
+
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+                sqlConn.Close();
+            }
+        }
+
+        private void dataGridView3_SelectionChanged(object sender, EventArgs e)
+        {
+            textBox2.Text = null;
+            textBox3.Text = null;
+            textBox4.Text = null;
+            comboBox5.Text = null;
+
+            if (dataGridView3.CurrentRow != null)
+            {
+                int rowindex = dataGridView3.CurrentRow.Index;
+                if (rowindex >= 0)
+                {
+                    DataGridViewRow row = dataGridView3.Rows[rowindex];
+
+                    textBox2.Text = row.Cells["成品編號"].Value.ToString();
+                    textBox3.Text = row.Cells["原料編號"].Value.ToString();
+                    textBox4.Text = row.Cells["添加量"].Value.ToString();
+                    comboBox5.Text = row.Cells["原料名"].Value.ToString();
+
+                }
+                else
+                {
+                    textBox1.Text = null;
+                    textBox2.Text = null;
+                    textBox3.Text = null;
+                    comboBox5.Text = null;
+                }
+            }
+        }
+
+        private void comboBox4_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            comboBox5load(comboBox4.Text);
+        }
+
+        public void comboBox5load(string TYPE)
+        {
+            connectionString = ConfigurationManager.ConnectionStrings["dberp"].ConnectionString;
+            sqlConn = new SqlConnection(connectionString);
+            StringBuilder Sequel = new StringBuilder();
+            Sequel.AppendFormat(@"SELECT [TYPE],[MB001],[MB002] FROM [TKQC].[dbo].[NUTRITIONBASE] WHERE [TYPE]='{0}' ORDER BY [MB001],[MB002]",TYPE);
+
+            SqlDataAdapter da = new SqlDataAdapter(Sequel.ToString(), sqlConn);
+            DataTable dt = new DataTable();
+            sqlConn.Open();
+
+            dt.Columns.Add("MB001", typeof(string));
+            dt.Columns.Add("MB002", typeof(string));
+
+            da.Fill(dt);
+            comboBox5.DataSource = dt.DefaultView;
+            comboBox5.ValueMember = "MB002";
+            comboBox5.DisplayMember = "MB002";
+            sqlConn.Close();
+        }
         #endregion
 
         #region BUTTON
@@ -674,8 +909,16 @@ namespace TKQC
             SEARCHNUTRITIONBASE(comboBox1.Text.Trim());
 
         }
+        private void button6_Click(object sender, EventArgs e)
+        {
+            SERACHNUTRITIONPROD(textBox1.Text.Trim());
+        }
+
+
+
+
         #endregion
 
-
+        
     }
 }
