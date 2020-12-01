@@ -543,6 +543,12 @@ namespace TKQC
             textBox353.Text = null;
         }
 
+        public void SETTEXTBOXNULL3()
+        {
+            textBox5.Text = null;
+            textBox7.Text = null;
+            
+        }
         public void SETTEXTBOX0()
         {
             textBox311.Text = null;
@@ -863,6 +869,54 @@ namespace TKQC
 
         }
 
+        public void ADDNUTRITIONPROD(string PRODID,string PRODNAME)
+        {
+            try
+            {
+                connectionString = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
+                sqlConn = new SqlConnection(connectionString);
+
+                sqlConn.Close();
+                sqlConn.Open();
+
+                sbSql.Clear();
+                sbSql.AppendFormat(@" 
+                                    INSERT INTO [TKQC].[dbo].[NUTRITIONPROD]
+                                    ([PRODID],[PRODNAME])
+                                    VALUES
+                                    ('{0}','{1}')
+                                                                      
+                                        ", PRODID, PRODNAME);
+
+
+                cmd.Connection = sqlConn;
+                cmd.CommandTimeout = 60;
+                cmd.CommandText = sbSql.ToString();
+                cmd.Transaction = tran;
+                result = cmd.ExecuteNonQuery();
+
+                if (result == 0)
+                {
+                    tran.Rollback();    //交易取消
+                }
+                else
+                {
+                    tran.Commit();      //執行交易  
+
+                    MessageBox.Show("完成");
+                }
+
+            }
+            catch
+            {
+
+            }
+
+            finally
+            {
+                sqlConn.Close();
+            }
+        }
         #endregion
 
         #region BUTTON
@@ -927,6 +981,12 @@ namespace TKQC
         private void button9_Click(object sender, EventArgs e)
         {
 
+        }
+        private void button11_Click(object sender, EventArgs e)
+        {
+            ADDNUTRITIONPROD(textBox5.Text.Trim(), textBox7.Text.Trim());
+            SERACHNUTRITIONPROD(textBox1.Text.Trim());
+            SETTEXTBOXNULL3();
         }
 
         #endregion
