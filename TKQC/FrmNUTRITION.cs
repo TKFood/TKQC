@@ -665,20 +665,18 @@ namespace TKQC
                 if(!string.IsNullOrEmpty(MB002))
                 {
                     sbSql.AppendFormat(@"
-                                    SELECT[PRODID] AS '成品編號' ,[PRODNAME]
-                                    AS '成品名' 
-                                    FROM[TKQC].[dbo].[NUTRITIONPROD]
-                                    WHERE([PRODID] LIKE '%{0}%' OR[PRODNAME] LIKE '%{0}%')
-                                    GROUP BY[PRODID],[PRODNAME]
+                                        SELECT  [PRODID] AS '成品編號',[PRODNAME]  AS '成品名' 
+                                        FROM [TKQC].[dbo].[NUTRITIONPROD]
+                                        WHERE([PRODID] LIKE '%{0}%' OR[PRODNAME] LIKE '%{0}%')
+                                        ORDER BY [PRODID],[PRODNAME]
                                     ", MB002);
                 }
                 else
                 {
                     sbSql.AppendFormat(@"
-                                    SELECT[PRODID] AS '成品編號' ,[PRODNAME]
-                                    AS '成品名' 
-                                    FROM[TKQC].[dbo].[NUTRITIONPROD]
-                                    GROUP BY[PRODID],[PRODNAME]
+                                        SELECT  [PRODID] AS '成品編號',[PRODNAME]  AS '成品名' 
+                                        FROM [TKQC].[dbo].[NUTRITIONPROD]                                       
+                                        ORDER BY [PRODID],[PRODNAME]
                                     ");
                 }
                
@@ -731,7 +729,7 @@ namespace TKQC
                     DataGridViewRow row = dataGridView1.Rows[rowindex];
 
                     PRODID = row.Cells["成品編號"].Value.ToString();
-                    SERACHNUTRITIONPROD2(PRODID);
+                    SERACHNUTRITIONPRODDETAIL(PRODID);
                 }
                 else
                 {
@@ -740,7 +738,7 @@ namespace TKQC
             }
         }
 
-        public void SERACHNUTRITIONPROD2(string PRODID)
+        public void SERACHNUTRITIONPRODDETAIL(string PRODID)
         {
             SqlDataAdapter adapter1 = new SqlDataAdapter();
             SqlCommandBuilder sqlCmdBuilder1 = new SqlCommandBuilder();
@@ -762,7 +760,7 @@ namespace TKQC
                                     ,[MB002] AS '原料名'
                                     ,[USEDANOUNT] AS '添加量'
                                     ,[ID]
-                                    FROM [TKQC].[dbo].[NUTRITIONPROD]
+                                    FROM [TKQC].[dbo].[NUTRITIONPRODDETAIL]
                                     WHERE [PRODID]='{0}'
                                     ORDER BY [PRODID],[MB001]
                                     ", PRODID);
@@ -859,6 +857,12 @@ namespace TKQC
             comboBox5.DisplayMember = "MB002";
             sqlConn.Close();
         }
+
+        public void UPDATENUTRITIONPROD()
+        {
+
+        }
+
         #endregion
 
         #region BUTTON
@@ -915,10 +919,18 @@ namespace TKQC
         }
 
 
+        private void button8_Click(object sender, EventArgs e)
+        {
 
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+
+        }
 
         #endregion
 
-        
+
     }
 }
