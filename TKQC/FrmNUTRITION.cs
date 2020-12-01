@@ -546,7 +546,7 @@ namespace TKQC
         public void SETTEXTBOXNULL3()
         {
             textBox5.Text = null;
-            textBox7.Text = null;
+            textBox6.Text = null;
             
         }
         public void SETTEXTBOX0()
@@ -727,6 +727,9 @@ namespace TKQC
         {
             string PRODID = null;
 
+            textBox7.Text = null;
+            textBox8.Text = null;
+
             if (dataGridView1.CurrentRow != null)
             {
                 int rowindex = dataGridView1.CurrentRow.Index;
@@ -735,6 +738,8 @@ namespace TKQC
                     DataGridViewRow row = dataGridView1.Rows[rowindex];
 
                     PRODID = row.Cells["成品編號"].Value.ToString();
+                    textBox7.Text = row.Cells["成品編號"].Value.ToString();
+                    textBox8.Text = row.Cells["成品名"].Value.ToString();
                     SERACHNUTRITIONPRODDETAIL(PRODID);
                 }
                 else
@@ -864,9 +869,52 @@ namespace TKQC
             sqlConn.Close();
         }
 
-        public void UPDATENUTRITIONPROD()
+        public void UPDATENUTRITIONPROD(string PRODID, string PRODNAME)
         {
+            try
+            {
+                connectionString = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
+                sqlConn = new SqlConnection(connectionString);
 
+                sqlConn.Close();
+                sqlConn.Open();
+
+                sbSql.Clear();
+                sbSql.AppendFormat(@" 
+                                    UPDATE  [TKQC].[dbo].[NUTRITIONPROD]
+                                    SET [PRODID]='{0}',[PRODNAME]='{1}'
+                                    WHERE [PRODID]='{0}'
+                                                                      
+                                        ", PRODID, PRODNAME);
+
+
+                cmd.Connection = sqlConn;
+                cmd.CommandTimeout = 60;
+                cmd.CommandText = sbSql.ToString();
+                cmd.Transaction = tran;
+                result = cmd.ExecuteNonQuery();
+
+                if (result == 0)
+                {
+                    tran.Rollback();    //交易取消
+                }
+                else
+                {
+                    tran.Commit();      //執行交易  
+
+                    MessageBox.Show("完成");
+                }
+
+            }
+            catch
+            {
+
+            }
+
+            finally
+            {
+                sqlConn.Close();
+            }
         }
 
         public void ADDNUTRITIONPROD(string PRODID,string PRODNAME)
@@ -917,6 +965,54 @@ namespace TKQC
                 sqlConn.Close();
             }
         }
+
+        public void DELETENUTRITIONPROD(string PRODID)
+        {
+            try
+            {
+                connectionString = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
+                sqlConn = new SqlConnection(connectionString);
+
+                sqlConn.Close();
+                sqlConn.Open();
+
+                sbSql.Clear();
+                sbSql.AppendFormat(@" 
+                                    DELETE [TKQC].[dbo].[NUTRITIONPROD]
+                                    WHERE [PRODID]='{0}'
+                                                                      
+                                        ", PRODID);
+
+
+                cmd.Connection = sqlConn;
+                cmd.CommandTimeout = 60;
+                cmd.CommandText = sbSql.ToString();
+                cmd.Transaction = tran;
+                result = cmd.ExecuteNonQuery();
+
+                if (result == 0)
+                {
+                    tran.Rollback();    //交易取消
+                }
+                else
+                {
+                    tran.Commit();      //執行交易  
+
+                    MessageBox.Show("完成");
+                }
+
+            }
+            catch
+            {
+
+            }
+
+            finally
+            {
+                sqlConn.Close();
+            }
+        }
+
         #endregion
 
         #region BUTTON
@@ -984,9 +1080,30 @@ namespace TKQC
         }
         private void button11_Click(object sender, EventArgs e)
         {
-            ADDNUTRITIONPROD(textBox5.Text.Trim(), textBox7.Text.Trim());
+            ADDNUTRITIONPROD(textBox5.Text.Trim(), textBox6.Text.Trim());
             SERACHNUTRITIONPROD(textBox1.Text.Trim());
             SETTEXTBOXNULL3();
+        }
+        private void button10_Click(object sender, EventArgs e)
+        {
+            UPDATENUTRITIONPROD(textBox7.Text.Trim(), textBox8.Text.Trim());
+            SERACHNUTRITIONPROD(textBox1.Text.Trim());
+
+
+        }
+        private void button12_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("要刪除了?", "要刪除了?", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                DELETENUTRITIONPROD(textBox7.Text.Trim());
+                SERACHNUTRITIONPROD(textBox1.Text.Trim());
+            }
+            else if (dialogResult == DialogResult.No)
+            {
+                //do something else
+            }
+          
         }
 
         #endregion
