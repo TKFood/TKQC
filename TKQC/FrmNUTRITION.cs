@@ -39,14 +39,15 @@ namespace TKQC
         {
             InitializeComponent();
 
-            comboBox1load();
-            comboBox1load2();
-            comboBox1load3();
-            comboBox1load4();
+            comboBoxload();
+            comboBoxload2();
+            comboBoxload3();
+            comboBoxload4();
+            comboBoxload6();
         }
 
         #region FUNCTION
-        public void comboBox1load()
+        public void comboBoxload()
         {
             connectionString = ConfigurationManager.ConnectionStrings["dberp"].ConnectionString;
             sqlConn = new SqlConnection(connectionString);
@@ -67,7 +68,7 @@ namespace TKQC
 
         }
 
-        public void comboBox1load2()
+        public void comboBoxload2()
         {
             connectionString = ConfigurationManager.ConnectionStrings["dberp"].ConnectionString;
             sqlConn = new SqlConnection(connectionString);
@@ -89,7 +90,7 @@ namespace TKQC
 
         }
 
-        public void comboBox1load3()
+        public void comboBoxload3()
         {
             connectionString = ConfigurationManager.ConnectionStrings["dberp"].ConnectionString;
             sqlConn = new SqlConnection(connectionString);
@@ -111,7 +112,7 @@ namespace TKQC
 
         }
 
-        public void comboBox1load4()
+        public void comboBoxload4()
         {
             connectionString = ConfigurationManager.ConnectionStrings["dberp"].ConnectionString;
             sqlConn = new SqlConnection(connectionString);
@@ -128,6 +129,28 @@ namespace TKQC
             comboBox4.DataSource = dt.DefaultView;
             comboBox4.ValueMember = "ID";
             comboBox4.DisplayMember = "NAME";
+            sqlConn.Close();
+
+
+        }
+
+        public void comboBoxload6()
+        {
+            connectionString = ConfigurationManager.ConnectionStrings["dberp"].ConnectionString;
+            sqlConn = new SqlConnection(connectionString);
+            StringBuilder Sequel = new StringBuilder();
+            Sequel.AppendFormat(@"SELECT  [ID],[NAME] FROM [TKQC].[dbo].[NUTRITIONTYPE] ORDER BY ID ");
+            SqlDataAdapter da = new SqlDataAdapter(Sequel.ToString(), sqlConn);
+            DataTable dt = new DataTable();
+            sqlConn.Open();
+
+            dt.Columns.Add("ID", typeof(string));
+            dt.Columns.Add("NAME", typeof(string));
+
+            da.Fill(dt);
+            comboBox6.DataSource = dt.DefaultView;
+            comboBox6.ValueMember = "ID";
+            comboBox6.DisplayMember = "NAME";
             sqlConn.Close();
 
 
@@ -453,6 +476,52 @@ namespace TKQC
             }
         }
 
+        public string FINDMAXNUTRITIONPRODDETAILID()
+        {
+            SqlDataAdapter adapter1 = new SqlDataAdapter();
+            SqlCommandBuilder sqlCmdBuilder1 = new SqlCommandBuilder();
+            DataSet ds1 = new DataSet();
+
+            try
+            {
+                connectionString = ConfigurationManager.ConnectionStrings["dberp"].ConnectionString;
+                sqlConn = new SqlConnection(connectionString);
+
+                sbSql.Clear();
+
+
+                sbSql.AppendFormat(@"  
+                                    SELECT ISNULL(MAX([ID])+1,1)  AS 'ID' FROM [TKQC].[dbo].[NUTRITIONPRODDETAIL]
+                                    ");
+
+                adapter1 = new SqlDataAdapter(@"" + sbSql, sqlConn);
+
+                sqlCmdBuilder1 = new SqlCommandBuilder(adapter1);
+                sqlConn.Open();
+                ds1.Clear();
+                adapter1.Fill(ds1, "TEMPds1");
+                sqlConn.Close();
+
+                if (ds1.Tables["TEMPds1"].Rows.Count >= 1)
+                {
+                    return ds1.Tables["TEMPds1"].Rows[0]["ID"].ToString();
+                }
+                else
+                {
+                    return "1";
+                }
+
+            }
+            catch
+            {
+                return "1";
+            }
+            finally
+            {
+                sqlConn.Close();
+            }
+        }
+
         public void DELNUTRITIONBASE(string ID)
         {
             if(!string.IsNullOrEmpty(ID))
@@ -729,6 +798,8 @@ namespace TKQC
 
             textBox7.Text = null;
             textBox8.Text = null;
+            textBox9.Text = null;
+            textBox10.Text = null;
 
             if (dataGridView1.CurrentRow != null)
             {
@@ -740,6 +811,9 @@ namespace TKQC
                     PRODID = row.Cells["成品編號"].Value.ToString();
                     textBox7.Text = row.Cells["成品編號"].Value.ToString();
                     textBox8.Text = row.Cells["成品名"].Value.ToString();
+                    textBox9.Text = row.Cells["成品編號"].Value.ToString();
+                    textBox10.Text = row.Cells["成品名"].Value.ToString();
+
                     SERACHNUTRITIONPRODDETAIL(PRODID);
                 }
                 else
@@ -845,6 +919,7 @@ namespace TKQC
 
         private void comboBox4_SelectedIndexChanged(object sender, EventArgs e)
         {
+            comboBox5.Text = null;
             comboBox5load(comboBox4.Text);
         }
 
@@ -864,8 +939,29 @@ namespace TKQC
 
             da.Fill(dt);
             comboBox5.DataSource = dt.DefaultView;
-            comboBox5.ValueMember = "MB002";
+            comboBox5.ValueMember = "MB001";
             comboBox5.DisplayMember = "MB002";
+            sqlConn.Close();
+        }
+
+        public void comboBox7load(string TYPE)
+        {
+            connectionString = ConfigurationManager.ConnectionStrings["dberp"].ConnectionString;
+            sqlConn = new SqlConnection(connectionString);
+            StringBuilder Sequel = new StringBuilder();
+            Sequel.AppendFormat(@"SELECT [TYPE],[MB001],[MB002] FROM [TKQC].[dbo].[NUTRITIONBASE] WHERE [TYPE]='{0}' ORDER BY [MB001],[MB002]", TYPE);
+
+            SqlDataAdapter da = new SqlDataAdapter(Sequel.ToString(), sqlConn);
+            DataTable dt = new DataTable();
+            sqlConn.Open();
+
+            dt.Columns.Add("MB001", typeof(string));
+            dt.Columns.Add("MB002", typeof(string));
+
+            da.Fill(dt);
+            comboBox7.DataSource = dt.DefaultView;
+            comboBox7.ValueMember = "MB001";
+            comboBox7.DisplayMember = "MB002";
             sqlConn.Close();
         }
 
@@ -1012,6 +1108,67 @@ namespace TKQC
                 sqlConn.Close();
             }
         }
+        private void comboBox6_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            comboBox7.Text = null;
+            comboBox7load(comboBox6.Text);
+        }
+        private void comboBox7_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            textBox11.Text = comboBox7.SelectedValue.ToString();
+        }
+
+        public void ADDNUTRITIONPRODDETAIL(string ID, string PRODID, string PRODNAME, string MB001, string MB002,decimal USEDANOUNT)
+        {
+            try
+            {
+                connectionString = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
+                sqlConn = new SqlConnection(connectionString);
+
+                ID = FINDMAXNUTRITIONPRODDETAILID();
+
+                sqlConn.Close();
+                sqlConn.Open();
+
+                sbSql.Clear();
+                sbSql.AppendFormat(@" 
+                                    INSERT INTO [TKQC].[dbo].[NUTRITIONPRODDETAIL]
+                                    ([ID],[PRODID],[PRODNAME],[MB001],[MB002],[USEDANOUNT])
+                                    VALUES
+                                    ('{0}','{1}','{2}','{3}','{4}',{5})
+                                                                      
+                                        ", ID, PRODID, PRODNAME, MB001, MB002, USEDANOUNT);
+
+
+                cmd.Connection = sqlConn;
+                cmd.CommandTimeout = 60;
+                cmd.CommandText = sbSql.ToString();
+                cmd.Transaction = tran;
+                result = cmd.ExecuteNonQuery();
+
+                if (result == 0)
+                {
+                    tran.Rollback();    //交易取消
+                }
+                else
+                {
+                    tran.Commit();      //執行交易  
+
+                    MessageBox.Show("完成");
+                }
+
+            }
+            catch
+            {
+
+            }
+
+            finally
+            {
+                sqlConn.Close();
+            }
+        }
+
 
         #endregion
 
@@ -1105,6 +1262,13 @@ namespace TKQC
             }
           
         }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+            ADDNUTRITIONPRODDETAIL(ID,textBox9.Text,textBox10.Text, textBox11.Text,comboBox7.Text, Convert.ToDecimal(textBox12.Text));
+            SERACHNUTRITIONPRODDETAIL(textBox9.Text);
+        }
+
 
         #endregion
 
