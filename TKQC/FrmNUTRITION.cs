@@ -16,7 +16,8 @@ using NPOI.SS.Util;
 using System.Reflection;
 using System.Threading;
 using System.Globalization;
-
+using FastReport;
+using FastReport.Data;
 
 namespace TKQC
 {
@@ -802,6 +803,7 @@ namespace TKQC
             textBox8.Text = null;
             textBox9.Text = null;
             textBox10.Text = null;
+            textBox14.Text = null;
 
             if (dataGridView1.CurrentRow != null)
             {
@@ -815,6 +817,7 @@ namespace TKQC
                     textBox8.Text = row.Cells["成品名"].Value.ToString();
                     textBox9.Text = row.Cells["成品編號"].Value.ToString();
                     textBox10.Text = row.Cells["成品名"].Value.ToString();
+                    textBox14.Text = row.Cells["成品編號"].Value.ToString();
 
                     SERACHNUTRITIONPRODDETAIL(PRODID);
                 }
@@ -1272,6 +1275,62 @@ namespace TKQC
             }
         }
 
+        public void SETFASTREPORT(string PRODID)
+        {
+            StringBuilder SQL1 = new StringBuilder();
+
+            SQL1 = SETSQL1(PRODID);
+            Report report1 = new Report();
+            report1.Load(@"REPORT\營養計算.frx");
+
+            report1.Dictionary.Connections[0].ConnectionString = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
+            TableDataSource table = report1.GetDataSource("Table") as TableDataSource;
+            table.SelectCommand = SQL1.ToString();
+
+            report1.Preview = previewControl1;
+            report1.Show();
+        }
+
+        public StringBuilder SETSQL1(string PRODID)
+        {
+            StringBuilder SB = new StringBuilder();
+
+           
+            SB.AppendFormat(@"  
+                            SELECT [NUTRITIONPRODDETAIL].[ID] AS '序號'
+                            ,[NUTRITIONPROD].[PRODID] AS '成品編號'
+                            ,[NUTRITIONPROD].[PRODNAME] AS '成品名'
+                            ,[NUTRITIONPRODDETAIL].[MB001] AS '原料編號'
+                            ,[NUTRITIONPRODDETAIL].[MB002] AS '原料名'
+                            ,[NUTRITIONPRODDETAIL].[USEDANOUNT] AS '添加量'
+                            ,[NUTRITIONBASE].[CALORIES]*[NUTRITIONPRODDETAIL].[USEDANOUNT] AS '熱量Kcal/100g'
+                            ,[NUTRITIONBASE].[FAT]*[NUTRITIONPRODDETAIL].[USEDANOUNT] AS '脂肪g/100g'
+                            ,[NUTRITIONBASE].[SATURATEDFAT]*[NUTRITIONPRODDETAIL].[USEDANOUNT] AS '飽和脂肪g/100g'
+                            ,[NUTRITIONBASE].[TRANSFAT]*[NUTRITIONPRODDETAIL].[USEDANOUNT] AS '反式脂肪g/100g'
+                            ,[NUTRITIONBASE].[CHOLESTEROL]*[NUTRITIONPRODDETAIL].[USEDANOUNT] AS '膽固醇mg/100g'
+                            ,[NUTRITIONBASE].[SODIUM]*[NUTRITIONPRODDETAIL].[USEDANOUNT] AS '鈉mg/100g'
+                            ,[NUTRITIONBASE].[CARBOHYDRATES]*[NUTRITIONPRODDETAIL].[USEDANOUNT] AS '碳水化合物g/100g'
+                            ,[NUTRITIONBASE].[DIETARYFIBER]*[NUTRITIONPRODDETAIL].[USEDANOUNT] AS '膳食纖維g/100g'
+                            ,[NUTRITIONBASE].[SUGAR]*[NUTRITIONPRODDETAIL].[USEDANOUNT] AS '糖g/100g'
+                            ,[NUTRITIONBASE].[ADDSUGAR]*[NUTRITIONPRODDETAIL].[USEDANOUNT] AS '添加糖g/100g'
+                            ,[NUTRITIONBASE].[PROTEIN]*[NUTRITIONPRODDETAIL].[USEDANOUNT] AS '蛋白質g/100g'
+                            ,[NUTRITIONBASE].[VITANMIND]*[NUTRITIONPRODDETAIL].[USEDANOUNT] AS '維生素D mcg/100g'
+                            ,[NUTRITIONBASE].[CALCIUM]*[NUTRITIONPRODDETAIL].[USEDANOUNT] AS '鈣 mg/100g'
+                            ,[NUTRITIONBASE].[IRON]*[NUTRITIONPRODDETAIL].[USEDANOUNT] AS '鐵mg/100g'
+                            ,[NUTRITIONBASE].[POTASSIUM]*[NUTRITIONPRODDETAIL].[USEDANOUNT] AS '鉀mg/100g'
+                            FROM [TKQC].[dbo].[NUTRITIONPROD],[TKQC].[dbo].[NUTRITIONPRODDETAIL],[TKQC].[dbo].[NUTRITIONBASE] 
+                            WHERE [NUTRITIONPROD].[PRODID]=[NUTRITIONPRODDETAIL].[PRODID]
+                            AND [NUTRITIONPRODDETAIL].MB001=[NUTRITIONBASE].MB001
+                            AND [NUTRITIONPROD].[PRODID]='1'
+                            ORDER BY [NUTRITIONPRODDETAIL].[MB001]
+                            ", PRODID);
+
+
+
+            return SB;
+
+        }
+
         #endregion
 
         #region BUTTON
@@ -1380,6 +1439,10 @@ namespace TKQC
         {
             ADDNUTRITIONPRODDETAIL(ID,textBox9.Text,textBox10.Text, textBox11.Text,comboBox7.Text, Convert.ToDecimal(textBox12.Text));
             SERACHNUTRITIONPRODDETAIL(textBox9.Text);
+        }
+        private void button13_Click(object sender, EventArgs e)
+        {
+            SETFASTREPORT(textBox14.Text);
         }
 
 
