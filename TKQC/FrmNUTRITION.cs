@@ -1373,12 +1373,20 @@ namespace TKQC
 
         private void button7_Click(object sender, EventArgs e)
         {
-            ADDNUTRITIONBASE(ID, comboBox3.Text, textBox311.Text.Trim(), textBox312.Text, Convert.ToDecimal(textBox321.Text), Convert.ToDecimal(textBox322.Text), Convert.ToDecimal(textBox323.Text), Convert.ToDecimal(textBox324.Text), Convert.ToDecimal(textBox331.Text), Convert.ToDecimal(textBox332.Text), Convert.ToDecimal(textBox333.Text), Convert.ToDecimal(textBox334.Text), Convert.ToDecimal(textBox341.Text), Convert.ToDecimal(textBox342.Text), Convert.ToDecimal(textBox343.Text), Convert.ToDecimal(textBox344.Text), Convert.ToDecimal(textBox351.Text), Convert.ToDecimal(textBox352.Text), Convert.ToDecimal(textBox353.Text));
+            if(!string.IsNullOrEmpty(textBox311.Text))
+            {
+                ADDNUTRITIONBASE(ID, comboBox3.Text, textBox311.Text.Trim(), textBox312.Text, Convert.ToDecimal(textBox321.Text), Convert.ToDecimal(textBox322.Text), Convert.ToDecimal(textBox323.Text), Convert.ToDecimal(textBox324.Text), Convert.ToDecimal(textBox331.Text), Convert.ToDecimal(textBox332.Text), Convert.ToDecimal(textBox333.Text), Convert.ToDecimal(textBox334.Text), Convert.ToDecimal(textBox341.Text), Convert.ToDecimal(textBox342.Text), Convert.ToDecimal(textBox343.Text), Convert.ToDecimal(textBox344.Text), Convert.ToDecimal(textBox351.Text), Convert.ToDecimal(textBox352.Text), Convert.ToDecimal(textBox353.Text));
 
-            SETTEXTBOXNULL2();           
+                SETTEXTBOXNULL2();
 
-            SETTEXTBOXREADONLY4();
-            SEARCHNUTRITIONBASE(comboBox1.Text.Trim());
+                SETTEXTBOXREADONLY4();
+                SEARCHNUTRITIONBASE(comboBox1.Text.Trim());
+            }
+            else
+            {
+                MessageBox.Show("請填寫品號");
+            }
+            
 
         }
         private void button6_Click(object sender, EventArgs e)
@@ -1409,9 +1417,17 @@ namespace TKQC
         }
         private void button11_Click(object sender, EventArgs e)
         {
-            ADDNUTRITIONPROD(textBox5.Text.Trim(), textBox6.Text.Trim());
-            SERACHNUTRITIONPROD(textBox1.Text.Trim());
-            SETTEXTBOXNULL3();
+            if(!string.IsNullOrEmpty(textBox5.Text))
+            {
+                ADDNUTRITIONPROD(textBox5.Text.Trim(), textBox6.Text.Trim());
+                SERACHNUTRITIONPROD(textBox1.Text.Trim());
+                SETTEXTBOXNULL3();
+            }
+            else
+            {
+                MessageBox.Show("請填寫品號");
+            }
+
         }
         private void button10_Click(object sender, EventArgs e)
         {
