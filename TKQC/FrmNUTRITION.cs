@@ -1321,7 +1321,7 @@ namespace TKQC
                             FROM [TKQC].[dbo].[NUTRITIONPROD],[TKQC].[dbo].[NUTRITIONPRODDETAIL],[TKQC].[dbo].[NUTRITIONBASE] 
                             WHERE [NUTRITIONPROD].[PRODID]=[NUTRITIONPRODDETAIL].[PRODID]
                             AND [NUTRITIONPRODDETAIL].MB001=[NUTRITIONBASE].MB001
-                            AND [NUTRITIONPROD].[PRODID]='1'
+                            AND [NUTRITIONPROD].[PRODID]='{0}' 
                             ORDER BY [NUTRITIONPRODDETAIL].[MB001]
                             ", PRODID);
 
