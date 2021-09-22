@@ -22,6 +22,8 @@ using System.Configuration;
 using NPOI.XSSF.UserModel;
 using FastReport;
 using FastReport.Data;
+using TKITDLL;
+
 
 namespace TKQC
 {
@@ -42,7 +44,20 @@ namespace TKQC
             Report report1 = new Report();
             report1.Load(@"REPORT\每月新增資料-非追.frx");
 
-            report1.Dictionary.Connections[0].ConnectionString = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
+            //20210902密
+            Class1 TKID = new Class1();//用new 建立類別實體
+            SqlConnectionStringBuilder sqlsb = new SqlConnectionStringBuilder(ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString);
+
+            //資料庫使用者密碼解密
+            sqlsb.Password = TKID.Decryption(sqlsb.Password);
+            sqlsb.UserID = TKID.Decryption(sqlsb.UserID);
+
+            String connectionString;
+            SqlConnection sqlConn = new SqlConnection(sqlsb.ConnectionString);
+
+            report1.Dictionary.Connections[0].ConnectionString = sqlsb.ConnectionString;
+
+                        
             TableDataSource table = report1.GetDataSource("Table") as TableDataSource;
             table.SelectCommand = SQL1.ToString();
 
@@ -58,7 +73,7 @@ namespace TKQC
             {
                 SB.AppendFormat(@"  SELECT MA001 AS ID,MA002 AS NAME");
                 SB.AppendFormat(@"  FROM [TK].dbo.COPMA");
-                SB.AppendFormat(@"  WHERE CREATE_DATE>='{0}' AND  CREATE_DATE>='{1}'",dateTimePicker1.Value.ToString("yyyyMMdd"), dateTimePicker2.Value.ToString("yyyyMMdd"));
+                SB.AppendFormat(@"  WHERE CREATE_DATE>='{0}' AND  CREATE_DATE<='{1}'",dateTimePicker1.Value.ToString("yyyyMMdd"), dateTimePicker2.Value.ToString("yyyyMMdd"));
                 SB.AppendFormat(@"  AND MA001 NOT LIKE '1%'");
                 SB.AppendFormat(@"  ");
                 SB.AppendFormat(@"  ");
@@ -67,7 +82,7 @@ namespace TKQC
             {
                 SB.AppendFormat(@"  SELECT MA001 AS ID,MA002 AS NAME");
                 SB.AppendFormat(@"  FROM [TK].dbo.PURMA");
-                SB.AppendFormat(@"  WHERE CREATE_DATE>='{0}' AND  CREATE_DATE>='{1}'", dateTimePicker1.Value.ToString("yyyyMMdd"), dateTimePicker2.Value.ToString("yyyyMMdd"));
+                SB.AppendFormat(@"  WHERE CREATE_DATE>='{0}' AND  CREATE_DATE<='{1}'", dateTimePicker1.Value.ToString("yyyyMMdd"), dateTimePicker2.Value.ToString("yyyyMMdd"));
                 SB.AppendFormat(@"  ");
                 SB.AppendFormat(@"  ");
                 SB.AppendFormat(@"  ");
@@ -76,7 +91,7 @@ namespace TKQC
             {
                 SB.AppendFormat(@"  SELECT MB001 AS ID,MB002 AS NAME");
                 SB.AppendFormat(@"  FROM [TK].dbo.INVMB");
-                SB.AppendFormat(@"  WHERE CREATE_DATE>='{0}' AND  CREATE_DATE>='{1}'", dateTimePicker1.Value.ToString("yyyyMMdd"), dateTimePicker2.Value.ToString("yyyyMMdd"));
+                SB.AppendFormat(@"  WHERE CREATE_DATE>='{0}' AND  CREATE_DATE<='{1}'", dateTimePicker1.Value.ToString("yyyyMMdd"), dateTimePicker2.Value.ToString("yyyyMMdd"));
                 SB.AppendFormat(@"  AND MB001 LIKE '4%'");
                 SB.AppendFormat(@"  ");
                 SB.AppendFormat(@"  ");
