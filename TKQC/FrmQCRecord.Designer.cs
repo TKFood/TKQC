@@ -172,7 +172,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1084, 829);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1084, 702);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // button7
@@ -660,7 +660,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1084, 829);
+            this.ClientSize = new System.Drawing.Size(1084, 702);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "FrmQCRecord";
             this.Text = "FrmQCRecord";
