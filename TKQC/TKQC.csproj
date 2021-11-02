@@ -100,6 +100,12 @@
     <Compile Include="FrmQCRecord.Designer.cs">
       <DependentUpon>FrmQCRecord.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmQCWH.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmQCWH.Designer.cs">
+      <DependentUpon>frmQCWH.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmREPORTQC.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -120,6 +126,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmQCRecord.resx">
       <DependentUpon>FrmQCRecord.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmQCWH.resx">
+      <DependentUpon>frmQCWH.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmREPORTQC.resx">
       <DependentUpon>FrmREPORTQC.cs</DependentUpon>
