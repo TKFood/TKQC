@@ -103,6 +103,7 @@ namespace TKQC
                             AND TA006='Y'
                             AND TA001 IN ('A130')
                             AND TA003>='{0}' AND TA003<='{1}'
+
                             UNION ALL
                             SELECT TI001 AS '單別',TI002 AS '單號',TI003 AS '異動日期',TI005 AS '部門代號',TI021+' '+TI020 AS '單頭備註'
                             ,TJ003 AS '序號',TJ004 AS '品號',TJ005 AS '品名',TJ006 AS '規格',TJ007 AS '數量'
@@ -113,6 +114,19 @@ namespace TKQC
                             AND TI019='Y'
                             AND (TJ004 LIKE '4%' OR TJ004 LIKE '5%' ) 
                             AND TI003>='{0}' AND TI003<='{1}'
+
+                            UNION ALL 
+                            SELECT TH001 AS '單別',TH002 AS '單號',TH003 AS '異動日期',TH007 AS '部門代號',TH014 AS '單頭備註'
+                            ,TI003 AS '序號',TI004 AS '品號',TI005 AS '品名',TI006 AS '規格',TI009 AS '數量'
+                            ,TI010 AS '單位',TI007 AS '轉出庫',MC1.MC002  AS '轉出',TI008 AS '轉入庫',MC2.MC002 AS '轉入',TI017 AS '批號',TI018 AS '有效日期',TI019 AS '複檢日期',TH014+' '+TI021 AS '原因備註'
+
+                            FROM [TK].dbo.INVTH,[TK].dbo.INVTI
+                            LEFT JOIN [TK].dbo.CMSMC MC1 ON MC1.MC001=TI007
+                            LEFT JOIN [TK].dbo.CMSMC MC2 ON MC2.MC001=TI008
+                            WHERE TH001=TI001 AND TH002=TI002
+                            AND TH020='Y'
+                            AND TH003>='{0}' AND TH003<='{1}'
+
                             ) AS TEMP 
                             ORDER BY 單別,單號,序號
 
