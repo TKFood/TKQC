@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="06/13/2022 11:12:19" ReportInfo.Modified="06/13/2022 11:43:21" ReportInfo.CreatorVersion="2016.4.4.0">
+  <Dictionary>
+    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqHwzMSgwTFaHpjtG3vsOj8Zy6q+uhwpDsytgWqwZQZyEQUQyQ022aWUGqU90pHzzNjHuzu89K+RQ2LIBVx1fpgNkNJhwC4eetn2/Uy0fMrO7zDUE5AmRb+0bcYI+lxqpN+i5gA3VDGcwlcfm6L9ZMsLrZ3U+wEDtHCQtd9vw2XUEBeG2KElcbhyJYppIXAxxl">
+      <TableDataSource Name="Table" DataType="System.Int32" Enabled="true" SelectCommand="--20220613 查寄倉退回的備註原因&#13;&#10;SELECT *&#13;&#10;FROM (&#13;&#10;SELECT TA001 AS '單別',TA002 AS '單號',TA003 AS '異動日期',TA004 AS '部門代號',TA005 AS '單頭備註'&#13;&#10;,TB003 AS '序號',TB004 AS '品號',TB005 AS '品名',TB006 AS '規格',TB007 AS '數量'&#13;&#10;,TB008 AS '單位',TB012 AS '轉出庫',MC1.MC002 AS '轉出',TB013 AS '轉入庫',MC2.MC002 AS '轉入',TB014 AS '批號',TB015 AS '有效日期',TB016 AS '複檢日期',TA005+' '+TB017 AS '原因備註'&#13;&#10;FROM [TK].dbo.INVTA,[TK].dbo.INVTB&#13;&#10;LEFT JOIN [TK].dbo.CMSMC MC1 ON MC1.MC001=TB012&#13;&#10;LEFT JOIN [TK].dbo.CMSMC MC2 ON MC2.MC001=TB013&#13;&#10;WHERE TA001=TB001 AND TA002=TB002&#13;&#10;AND TA006='Y'&#13;&#10;AND TA001 IN ('A130')&#13;&#10;AND TA003&gt;='20220101' AND TA003&lt;='20220701'&#13;&#10;UNION ALL&#13;&#10;SELECT TI001 AS '單別',TI002 AS '單號',TI003 AS '異動日期',TI005 AS '部門代號',TI021+' '+TI020 AS '單頭備註'&#13;&#10;,TJ003 AS '序號',TJ004 AS '品號',TJ005 AS '品名',TJ006 AS '規格',TJ007 AS '數量'&#13;&#10;,TJ008 AS '單位','' AS '轉出庫','' AS '轉出',TJ013 AS '轉入庫',MC002 AS '轉入',TJ014 AS '批號',TJ096 AS '有效日期',TJ057 AS '複檢日期',TI021+' '+TI020+' '+TJ023 AS '原因備註'&#13;&#10;FROM [TK].dbo.COPTI,[TK].dbo.COPTJ&#13;&#10;LEFT JOIN [TK].dbo.CMSMC MC1 ON MC1.MC001=TJ013&#13;&#10;WHERE TI001=TJ001 AND TI002=TJ002&#13;&#10;AND TI019='Y'&#13;&#10;AND (TJ004 LIKE '4%' OR TJ004 LIKE '5%' ) &#13;&#10;AND TI003&gt;='20220101' AND TI003&lt;='20220701'&#13;&#10;) AS TEMP &#13;&#10;ORDER BY 單別,單號,序號&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;&#13;&#10;--&#13;&#10;SELECT TI001 AS '單別',TI002 AS '單號',TI003 AS '異動日期',TI005 AS '部門代號',TI021+' '+TI020 AS '單頭備註'&#13;&#10;,TJ003 AS '序號',TJ004 AS '品號',TJ005 AS '品名',TJ006 AS '規格',TJ007 AS '數量'&#13;&#10;,TJ008 AS '單位','' AS '轉出庫','' AS '轉出',TJ013 AS '轉入庫',MC002 AS '轉入',TJ014 AS '批號',TJ096 AS '有效日期',TJ057 AS '複檢日期',TI021+' '+TI020+' '+TJ023 AS '原因備註'&#13;&#10;FROM [TK].dbo.COPTI,[TK].dbo.COPTJ&#13;&#10;LEFT JOIN [TK].dbo.CMSMC MC1 ON MC1.MC001=TJ013&#13;&#10;WHERE TI001=TJ001 AND TI002=TJ002&#13;&#10;AND TI019='Y'&#13;&#10;AND (TJ004 LIKE '4%' OR TJ004 LIKE '5%' ) &#13;&#10;AND TI003&gt;='20220101' AND TI003&lt;='20220701'&#13;&#10;ORDER BY TJ001,TJ002,TJ003&#13;&#10;&#13;&#10;&#13;&#10;--&#13;&#10;SELECT *&#13;&#10;FROM [TK].dbo.CMSMC&#13;&#10;&#13;&#10;--&#13;&#10;SELECT *&#13;&#10;FROM [TK].dbo.CMSMQ &#13;&#10;WHERE MQ008='2' AND MQ010='1'">
+        <Column Name="單別" DataType="System.String"/>
+        <Column Name="單號" DataType="System.String"/>
+        <Column Name="異動日期" DataType="System.String"/>
+        <Column Name="部門代號" DataType="System.String"/>
+        <Column Name="單頭備註" DataType="System.String"/>
+        <Column Name="序號" DataType="System.String"/>
+        <Column Name="品號" DataType="System.String"/>
+        <Column Name="品名" DataType="System.String"/>
+        <Column Name="規格" DataType="System.String"/>
+        <Column Name="數量" DataType="System.Decimal"/>
+        <Column Name="單位" DataType="System.String"/>
+        <Column Name="轉出庫" DataType="System.String"/>
+        <Column Name="轉出" DataType="System.String"/>
+        <Column Name="轉入庫" DataType="System.String"/>
+        <Column Name="轉入" DataType="System.String"/>
+        <Column Name="批號" DataType="System.String"/>
+        <Column Name="有效日期" DataType="System.String"/>
+        <Column Name="複檢日期" DataType="System.String"/>
+        <Column Name="原因備註" DataType="System.String"/>
+      </TableDataSource>
+    </MsSqlDataConnection>
+  </Dictionary>
+  <ReportPage Name="Page1" Landscape="true" PaperWidth="800" PaperHeight="210">
+    <ReportTitleBand Name="ReportTitle1" Width="2948.4" Height="18.9">
+      <TextObject Name="Text1" Width="2948.4" Height="18.9" Text="寄倉 銷貨 退回報表" HorzAlign="Center" VertAlign="Center"/>
+    </ReportTitleBand>
+    <PageHeaderBand Name="PageHeader1" Top="23.39" Width="2948.4" Height="18.9">
+      <TextObject Name="Text3" Width="94.5" Height="18.9" Border.Lines="All" Text="單別" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text5" Left="94.5" Width="94.5" Height="18.9" Border.Lines="All" Text="單號" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text7" Left="189" Width="94.5" Height="18.9" Border.Lines="All" Text="異動日期" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text9" Left="283.5" Width="94.5" Height="18.9" Border.Lines="All" Text="部門代號" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text11" Left="378" Width="321.3" Height="18.9" Border.Lines="All" Text="單頭備註" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text13" Left="699.3" Width="94.5" Height="18.9" Border.Lines="All" Text="序號" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text15" Left="793.8" Width="132.3" Height="18.9" Border.Lines="All" Text="品號" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text17" Left="926.1" Width="274.05" Height="18.9" Border.Lines="All" Text="品名" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text29" Left="1833.3" Width="75.6" Height="18.9" Border.Lines="All" Text="轉入庫" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text31" Left="1908.9" Width="141.75" Height="18.9" Border.Lines="All" Text="轉入" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text33" Left="2050.65" Width="94.5" Height="18.9" Border.Lines="All" Text="批號" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text35" Left="2145.15" Width="94.5" Height="18.9" Border.Lines="All" Text="有效日期" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text37" Left="2239.65" Width="94.5" Height="18.9" Border.Lines="All" Text="複檢日期" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text39" Left="2334.15" Width="614.25" Height="18.9" Border.Lines="All" Text="原因備註" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text19" Left="1200.15" Width="179.55" Height="18.9" Border.Lines="All" Text="規格" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text21" Left="1379.7" Width="94.5" Height="18.9" Border.Lines="All" Text="數量" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text23" Left="1474.2" Width="66.15" Height="18.9" Border.Lines="All" Text="單位" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text27" Left="1635.97" Width="198.45" Height="18.9" Border.Lines="All" Text="轉出" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text25" Left="1540.35" Width="94.5" Height="18.9" Border.Lines="All" Text="轉出庫" HorzAlign="Center" VertAlign="Center"/>
+    </PageHeaderBand>
+    <DataBand Name="Data1" Top="46.79" Width="2948.4" Height="18.9" CanGrow="true" DataSource="Table">
+      <TextObject Name="Text2" Width="94.5" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.單別]" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text4" Left="94.5" Width="94.5" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.單號]" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text6" Left="189" Width="94.5" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.異動日期]" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text8" Left="283.5" Width="94.5" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.部門代號]" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text10" Left="378" Width="321.3" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.單頭備註]" VertAlign="Center"/>
+      <TextObject Name="Text12" Left="699.3" Width="94.5" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.序號]" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text14" Left="793.8" Width="132.3" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.品號]" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text16" Left="926.1" Width="274.05" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.品名]" VertAlign="Center"/>
+      <TextObject Name="Text28" Left="1833.3" Width="75.6" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.轉入庫]" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text30" Left="1908.9" Width="141.75" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.轉入]" VertAlign="Center"/>
+      <TextObject Name="Text32" Left="2050.65" Width="94.5" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.批號]" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text34" Left="2145.15" Width="94.5" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.有效日期]" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text36" Left="2239.65" Width="94.5" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.複檢日期]" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text38" Left="2334.15" Width="614.25" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.原因備註]" VertAlign="Center"/>
+      <TextObject Name="Text18" Left="1200.15" Width="179.55" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.規格]" VertAlign="Center"/>
+      <TextObject Name="Text20" Left="1379.7" Width="94.5" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.數量]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" WordWrap="false" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Text22" Left="1474.2" Width="66.15" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.單位]" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text26" Left="1635.97" Width="198.45" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.轉出]" VertAlign="Center"/>
+      <TextObject Name="Text24" Left="1540.35" Width="94.5" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.轉出庫]" HorzAlign="Center" VertAlign="Center"/>
+    </DataBand>
+    <PageFooterBand Name="PageFooter1" Top="70.18" Width="2948.4" Height="18.9"/>
+  </ReportPage>
+</Report>
