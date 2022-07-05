@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReportInfo.Created="05/19/2022 11:18:35" ReportInfo.Modified="05/19/2022 11:39:46" ReportInfo.CreatorVersion="2016.4.4.0">
+<Report ScriptLanguage="CSharp" ReportInfo.Created="05/19/2022 11:18:35" ReportInfo.Modified="07/05/2022 15:20:33" ReportInfo.CreatorVersion="2016.4.4.0">
   <Dictionary>
-    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqHwzMSgwTFaHpjtG3vsOj8Zy6q+uhwpDsytgWqwZQZyEQUQyQ022aWUGqU90pHzzNjHuzu89K+RQ2LIBVx1fpgNkNJhwC4eetn2/Uy0fMrO7zDUE5AmRb+0bcYI+lxqpN+i5gA3VDGcwlcfm6L9ZMsLrZ3U+wEDtHCQtd9vw2XUER/GSqKfSuJ0+tu3qgnKks">
+    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqHwzMSgwTFaHpjtG3vsOj8Zy6q+uhwpDsytgWqwZQZyEQUQyQ022aWUGqU90pHzzNjHuzu89K+RQ2LIBVx1fpgNkNJhwC4eetn2/Uy0fMrO7zDUE5AmRb+0bcYI+lxqpN+i5gA3VDGcwlcfm6L9ZMsLrZ3U+wEDtHCQtd9vw2XUHUwAdLHvl40OCJ5e4M/SHj">
       <TableDataSource Name="Table" DataType="System.Int32" Enabled="true" SelectCommand="/****** SSMS 中 SelectTopNRows 命令的指令碼  ******/&#13;&#10;SELECT&#13;&#10; [QCFrm002SN] AS '表單編號'&#13;&#10;,[QCFrm002Date] AS '申請日期'&#13;&#10;,[QCFrm002User] AS '申請者'&#13;&#10;,[QCFrm002Dept] AS '部門'&#13;&#10;,[QCFrm002Rank] AS '職級'&#13;&#10;,[QCFrm002CUST] AS '消費者姓名'&#13;&#10;,[QCFrm002TEL] AS '消費者電話'&#13;&#10;,[QCFrm002Add] AS '消費者地址'&#13;&#10;,[QCFrm002CU] AS '供應商/部門單位'&#13;&#10;,[QCFrm002PNO] AS '批號'&#13;&#10;,[QCFrm002CN] AS '品號'&#13;&#10;,[QCFrm002RDate] AS '受理日期'&#13;&#10;,[QCFrm002PRD] AS '品名'&#13;&#10;,[QCFrm002PKG] AS '包裝形式(單片包/罐裝)及規格'&#13;&#10;,[QCFrm002MD] AS '製造日期'&#13;&#10;,[QCFrm002ED] AS '有效日期'&#13;&#10;,[QCFrm002OD] AS '購買日期'&#13;&#10;,[QCFrm002BP] AS '購買地點'&#13;&#10;,[QCFrm002Prove] AS '購買證明'&#13;&#10;,[QCFrm002Abns] AS '客訴原因說明'&#13;&#10;,[QCFrm002Range] AS '使用範圍'&#13;&#10;,[QCFrm002RP] AS '客訴來源'&#13;&#10;,[QCFrm002RD] AS '產品預計回收日'&#13;&#10;,[QCFrm002Abn] AS '客訴原因詳述'&#13;&#10;,[QCFrm002Process] AS '業務處理方式'&#13;&#10;,[QCFrm002QCR] AS '品保建議回覆內容'&#13;&#10;,[QCFrm002ProcessR] AS '業務對外回覆'&#13;&#10;,[QCFrm002QCC] AS '品保判定'&#13;&#10;,[QCFrm002RCAU] AS '判定人員'&#13;&#10;,[QCFrm002PRRD] AS '實際產品回收日期'&#13;&#10;,[QCFrm002Cmf] AS '品保初判'&#13;&#10;,[QCFrm002False] AS '知會人員'&#13;&#10;,[REPORTS] AS '說明'&#13;&#10;FROM [TKQC].[dbo].[TBUOFQC1002] WITH(NOLOCK)&#13;&#10;WHERE [QCFrm002Date]&gt;='2022/05/01' AND [QCFrm002Date]&lt;='2022/05/31'&#13;&#10;ORDER BY [QCFrm002Date]">
         <Column Name="表單編號" DataType="System.String"/>
         <Column Name="申請日期" DataType="System.String"/>
@@ -40,36 +40,35 @@
     </MsSqlDataConnection>
   </Dictionary>
   <ReportPage Name="Page1" Landscape="true" PaperWidth="1000" PaperHeight="210">
-    <ReportTitleBand Name="ReportTitle1" Width="3704.4" Height="18.9">
+    <ReportTitleBand Name="ReportTitle1" Width="3704.4" Height="37.8">
       <TextObject Name="Text1" Width="3704.4" Height="18.9" Text="1002.客訴異常處理單報表"/>
+      <TextObject Name="Text3" Top="18.9" Width="103.95" Height="18.9" Border.Lines="All" Text="表單編號" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text5" Left="103.95" Top="18.9" Width="94.5" Height="18.9" Border.Lines="All" Text="申請日期" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text7" Left="198.45" Top="18.9" Width="94.5" Height="18.9" Border.Lines="All" Text="申請者" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text9" Left="292.95" Top="18.9" Width="94.5" Height="18.9" Border.Lines="All" Text="部門" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text11" Left="387.45" Top="18.9" Width="94.5" Height="18.9" Border.Lines="All" Text="職級" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text13" Left="481.95" Top="18.9" Width="94.5" Height="18.9" Border.Lines="All" Text="消費者姓名" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text15" Left="576.45" Top="18.9" Width="94.5" Height="18.9" Border.Lines="All" Text="消費者電話" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text17" Left="670.95" Top="18.9" Width="132.3" Height="18.9" Border.Lines="All" Text="消費者地址" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text21" Left="907.2" Top="18.9" Width="113.4" Height="18.9" Border.Lines="All" Text="品號" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text23" Left="1020.6" Top="18.9" Width="207.9" Height="18.9" Border.Lines="All" Text="品名" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text25" Left="1228.5" Top="18.9" Width="94.5" Height="18.9" Border.Lines="All" Text="批號" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text29" Left="1502.55" Top="18.9" Width="85.05" Height="18.9" Border.Lines="All" Text="購買日期" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text31" Left="1587.6" Top="18.9" Width="85.05" Height="18.9" Border.Lines="All" Text="製造日期" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text33" Left="1672.65" Top="18.9" Width="85.05" Height="18.9" Border.Lines="All" Text="有效日期" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text35" Left="1757.7" Top="18.9" Width="85.05" Height="18.9" Border.Lines="All" Text="購買證明" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text37" Left="1842.75" Top="18.9" Width="406.35" Height="18.9" Border.Lines="All" Text="客訴原因詳述" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text39" Left="2249.1" Top="18.9" Width="359.1" Height="18.9" Border.Lines="All" Text="業務處理方式" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text41" Left="2608.2" Top="18.9" Width="264.6" Height="18.9" Border.Lines="All" Text="品保建議回覆內容" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text43" Left="2872.8" Top="18.9" Width="274.05" Height="18.9" Border.Lines="All" Text="業務對外回覆" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text45" Left="3146.85" Top="18.9" Width="94.5" Height="18.9" Border.Lines="All" Text="品保判定" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text47" Left="3241.35" Top="18.9" Width="94.5" Height="18.9" Border.Lines="All" Text="判定人員" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text49" Left="3335.85" Top="18.9" Width="368.55" Height="18.9" Border.Lines="All" Text="品保初判" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text27" Left="1323" Top="18.9" Width="179.55" Height="18.9" Border.Lines="All" Text="包裝形式(單片包/罐裝)及規格" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text19" Left="803.25" Top="18.9" Width="103.95" Height="18.9" Border.Lines="All" Text="購買地點" HorzAlign="Center" VertAlign="Center"/>
     </ReportTitleBand>
-    <PageHeaderBand Name="PageHeader1" Top="23.39" Width="3704.4" Height="18.9">
-      <TextObject Name="Text3" Width="103.95" Height="18.9" Border.Lines="All" Text="表單編號" HorzAlign="Center" VertAlign="Center"/>
-      <TextObject Name="Text5" Left="103.95" Width="94.5" Height="18.9" Border.Lines="All" Text="申請日期" HorzAlign="Center" VertAlign="Center"/>
-      <TextObject Name="Text7" Left="198.45" Width="94.5" Height="18.9" Border.Lines="All" Text="申請者" HorzAlign="Center" VertAlign="Center"/>
-      <TextObject Name="Text9" Left="292.95" Width="94.5" Height="18.9" Border.Lines="All" Text="部門" HorzAlign="Center" VertAlign="Center"/>
-      <TextObject Name="Text11" Left="387.45" Width="94.5" Height="18.9" Border.Lines="All" Text="職級" HorzAlign="Center" VertAlign="Center"/>
-      <TextObject Name="Text13" Left="481.95" Width="94.5" Height="18.9" Border.Lines="All" Text="消費者姓名" HorzAlign="Center" VertAlign="Center"/>
-      <TextObject Name="Text15" Left="576.45" Width="94.5" Height="18.9" Border.Lines="All" Text="消費者電話" HorzAlign="Center" VertAlign="Center"/>
-      <TextObject Name="Text17" Left="670.95" Width="132.3" Height="18.9" Border.Lines="All" Text="消費者地址" HorzAlign="Center" VertAlign="Center"/>
-      <TextObject Name="Text21" Left="907.2" Width="113.4" Height="18.9" Border.Lines="All" Text="品號" HorzAlign="Center" VertAlign="Center"/>
-      <TextObject Name="Text23" Left="1020.6" Width="207.9" Height="18.9" Border.Lines="All" Text="品名" HorzAlign="Center" VertAlign="Center"/>
-      <TextObject Name="Text25" Left="1228.5" Width="94.5" Height="18.9" Border.Lines="All" Text="批號" HorzAlign="Center" VertAlign="Center"/>
-      <TextObject Name="Text29" Left="1502.55" Width="85.05" Height="18.9" Border.Lines="All" Text="購買日期" HorzAlign="Center" VertAlign="Center"/>
-      <TextObject Name="Text31" Left="1587.6" Width="85.05" Height="18.9" Border.Lines="All" Text="製造日期" HorzAlign="Center" VertAlign="Center"/>
-      <TextObject Name="Text33" Left="1672.65" Width="85.05" Height="18.9" Border.Lines="All" Text="有效日期" HorzAlign="Center" VertAlign="Center"/>
-      <TextObject Name="Text35" Left="1757.7" Width="85.05" Height="18.9" Border.Lines="All" Text="購買證明" HorzAlign="Center" VertAlign="Center"/>
-      <TextObject Name="Text37" Left="1842.75" Width="406.35" Height="18.9" Border.Lines="All" Text="客訴原因詳述" HorzAlign="Center" VertAlign="Center"/>
-      <TextObject Name="Text39" Left="2249.1" Width="359.1" Height="18.9" Border.Lines="All" Text="業務處理方式" HorzAlign="Center" VertAlign="Center"/>
-      <TextObject Name="Text41" Left="2608.2" Width="264.6" Height="18.9" Border.Lines="All" Text="品保建議回覆內容" HorzAlign="Center" VertAlign="Center"/>
-      <TextObject Name="Text43" Left="2872.8" Width="274.05" Height="18.9" Border.Lines="All" Text="業務對外回覆" HorzAlign="Center" VertAlign="Center"/>
-      <TextObject Name="Text45" Left="3146.85" Width="94.5" Height="18.9" Border.Lines="All" Text="品保判定" HorzAlign="Center" VertAlign="Center"/>
-      <TextObject Name="Text47" Left="3241.35" Width="94.5" Height="18.9" Border.Lines="All" Text="判定人員" HorzAlign="Center" VertAlign="Center"/>
-      <TextObject Name="Text49" Left="3335.85" Width="368.55" Height="18.9" Border.Lines="All" Text="品保初判" HorzAlign="Center" VertAlign="Center"/>
-      <TextObject Name="Text27" Left="1323" Width="179.55" Height="18.9" Border.Lines="All" Text="包裝形式(單片包/罐裝)及規格" HorzAlign="Center" VertAlign="Center"/>
-      <TextObject Name="Text19" Left="803.25" Width="103.95" Height="18.9" Border.Lines="All" Text="購買地點" HorzAlign="Center" VertAlign="Center"/>
-    </PageHeaderBand>
-    <DataBand Name="Data1" Top="46.79" Width="3704.4" Height="18.9" CanGrow="true" DataSource="Table">
+    <PageHeaderBand Name="PageHeader1" Top="42.29" Width="3704.4"/>
+    <DataBand Name="Data1" Top="46.79" Width="3704.4" Height="18.9" CanGrow="true" Guides="0" DataSource="Table">
       <TextObject Name="Text2" Width="103.95" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.表單編號]" HorzAlign="Center" VertAlign="Center"/>
       <TextObject Name="Text4" Left="103.95" Width="94.5" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.申請日期]" HorzAlign="Center" VertAlign="Center"/>
       <TextObject Name="Text6" Left="198.45" Width="94.5" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.申請者]" HorzAlign="Center" VertAlign="Center"/>

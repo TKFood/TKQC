@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <RunPostBuildEvent>Always</RunPostBuildEvent>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Aspose.Words">
       <HintPath>..\..\..\OpenXml\Aspose.Words.dll</HintPath>
@@ -39,9 +42,18 @@
     <Reference Include="DocumentFormat.OpenXml">
       <HintPath>..\..\..\OpenXml\DocumentFormat.OpenXml.dll</HintPath>
     </Reference>
-    <Reference Include="FastReport, Version=2016.4.4.0, Culture=neutral, PublicKeyToken=db7e5ce63278458c" />
-    <Reference Include="FastReport.Bars, Version=2016.4.4.0, Culture=neutral, PublicKeyToken=db7e5ce63278458c" />
-    <Reference Include="FastReport.Editor, Version=2016.4.4.0, Culture=neutral, PublicKeyToken=db7e5ce63278458c" />
+    <Reference Include="FastReport, Version=2017.4.1.0, Culture=neutral, PublicKeyToken=db7e5ce63278458c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Program Files (x86)\FastReports\FastReport.Net\FastReport.dll</HintPath>
+    </Reference>
+    <Reference Include="FastReport.Bars, Version=2017.4.1.0, Culture=neutral, PublicKeyToken=db7e5ce63278458c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Program Files (x86)\FastReports\FastReport.Net\FastReport.Bars.dll</HintPath>
+    </Reference>
+    <Reference Include="FastReport.Editor, Version=2017.4.1.0, Culture=neutral, PublicKeyToken=db7e5ce63278458c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Program Files (x86)\FastReports\FastReport.Net\FastReport.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="ICSharpCode.SharpZipLib">
       <HintPath>..\..\..\NPOI 2.2.1 binary package\Release\Net40\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
