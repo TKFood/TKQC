@@ -90,7 +90,7 @@ namespace TKQC
             StringBuilder SB = new StringBuilder();
 
             SB.AppendFormat(@"                            
-                            SELECT
+                            SELECT 
                              [QCFrm002SN] AS '表單編號'
                             ,[QCFrm002Date] AS '申請日期'
                             ,[QCFrm002User] AS '申請者'
