@@ -379,10 +379,12 @@ namespace TKQC
                                     WHERE UDF01<>'Y'
                                     AND [TH001]+[TH002]+[TH003] IN (SELECT [TH001]+[TH002]+[TH003] FROM [TKQC].[dbo].[QCPURTH] WHERE [ISIN]='Y')
 
+                                    
                                     UPDATE [TK].dbo.PURTH
-                                    SET UDF01='N'
-                                    WHERE UDF01<>'N'
+                                    SET UDF01=''
+                                    WHERE ISNULL(UDF01,'')<>''
                                     AND [TH001]+[TH002]+[TH003] IN (SELECT [TH001]+[TH002]+[TH003] FROM [TKQC].[dbo].[QCPURTH] WHERE [ISIN]='N')
+
 
                                         ");
 
@@ -431,6 +433,8 @@ namespace TKQC
 
             //更新ERP進貨單單身，是否經品保檢驗 
             UPDATETKPURTH();
+
+            Search(dateTimePicker1.Value.ToString("yyyyMMdd"), dateTimePicker2.Value.ToString("yyyyMMdd"));
         }
         private void button3_Click(object sender, EventArgs e)
         {
