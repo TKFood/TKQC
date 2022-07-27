@@ -100,7 +100,8 @@ namespace TKQC
                                     ,[TH003]
 
                                     FROM [TKQC].[dbo].[QCPURTH]
-                                    WHERE [TG003]>='{0}' AND [TG003]<='{1}'
+                                    WHERE TH001+TH002+TH003 IN (SELECT TH001+TH002+TH003 FROM [TK].dbo.PURTH WHERE  TH030 = 'N')
+                                    AND [TG003]>='{0}' AND [TG003]<='{1}'
 
                                     ", SDATES, EDATES);
 
@@ -421,17 +422,32 @@ namespace TKQC
                 tran = sqlConn.BeginTransaction();
 
                 sbSql.Clear();
+                                    // UPDATE[TK].dbo.PURTH
+                                    //SET UDF01 = 'Y', TH028 = '2'
+                                    //WHERE TH030 = 'N'
+                                    //AND TH028<> '2'
+                                    //AND[TH001] +[TH002] +[TH003] IN(SELECT[TH001] +[TH002] +[TH003] FROM[TKQC].[dbo].[QCPURTH] WHERE[ISIN] = 'Y')
+
+
+
+                                    //UPDATE[TK].dbo.PURTH
+                                    //SET UDF01 = '', TH028 = '1'
+                                    //WHERE TH030 = 'N'
+                                    //AND TH028<> '1'
+                                    //AND[TH001] +[TH002] +[TH003] IN(SELECT[TH001] +[TH002] +[TH003] FROM[TKQC].[dbo].[QCPURTH] WHERE[ISIN] = 'N')
 
                 sbSql.AppendFormat(@" 
                                     UPDATE [TK].dbo.PURTH
-                                    SET UDF01='Y',TH028='2'
-                                    WHERE TH028<>'2'
+                                    SET UDF01='Y'
+                                    WHERE  TH030 = 'N'
+                                    AND UDF01<>'Y'
                                     AND [TH001]+[TH002]+[TH003] IN (SELECT [TH001]+[TH002]+[TH003] FROM [TKQC].[dbo].[QCPURTH] WHERE [ISIN]='Y')
 
                                     
                                     UPDATE [TK].dbo.PURTH
-                                    SET UDF01='',TH028='1'
-                                    WHERE TH028<>'1'
+                                    SET UDF01=''
+                                    WHERE  TH030 = 'N'
+                                    AND ISNULL(UDF01,'')<>''
                                     AND [TH001]+[TH002]+[TH003] IN (SELECT [TH001]+[TH002]+[TH003] FROM [TKQC].[dbo].[QCPURTH] WHERE [ISIN]='N')
 
 
