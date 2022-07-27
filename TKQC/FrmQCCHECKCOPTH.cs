@@ -288,6 +288,70 @@ namespace TKQC
             }
         }
 
+
+        public void SETFASTREPORT(string SDATES,string EDATES)
+        {
+            StringBuilder SQL1 = new StringBuilder();
+
+            SQL1.AppendFormat(@"  
+                             
+                                SELECT 
+                                [ISIN] AS '是否允收'
+                                ,[TG003] AS '進貨日期'
+                                ,[TG005] AS '廠商代'
+                                ,[TG021] AS '廠商名稱'
+                                ,[TH004] AS '品號'
+                                ,[TH005] AS '品名'
+                                ,[TH006] AS '規格'
+                                ,[TH007] AS '進貨數量'
+                                ,[TH008] AS '單位'
+                                ,[TH009] AS '庫別'
+                                ,[SAMPLENUMS] AS '抽樣數量'
+                                ,[CARNO] AS '運輸車'
+                                ,[CHECKITEMS] AS '檢驗項目'
+                                ,[COA] AS '提供COA'
+                                ,[INNERCHECKS] AS '內部檢驗'
+                                ,[INUMS] AS '合格數量'
+                                ,[BACKNUMS] AS '退貨數量'
+                                ,[DATES] AS '日期'
+                                ,[QCMAN] AS '驗收人員'
+                                ,[COMMENTS] AS '備註'
+                                ,[TH001]
+                                ,[TH002]
+                                ,[TH003]
+
+
+                                FROM [TKQC].[dbo].[QCPURTH]
+                                WHERE [TG003]>='{0}' AND [TG003]<='{1}'
+                                
+                                ", SDATES, EDATES);
+
+            Report report1 = new Report();
+            report1.Load(@"REPORT\原物料品質驗收單.frx");
+
+            //20210902密
+            Class1 TKID = new Class1();//用new 建立類別實體
+            SqlConnectionStringBuilder sqlsb = new SqlConnectionStringBuilder(ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString);
+
+            //資料庫使用者密碼解密
+            sqlsb.Password = TKID.Decryption(sqlsb.Password);
+            sqlsb.UserID = TKID.Decryption(sqlsb.UserID);
+
+            String connectionString;
+            SqlConnection sqlConn = new SqlConnection(sqlsb.ConnectionString);
+
+            report1.Dictionary.Connections[0].ConnectionString = sqlsb.ConnectionString;
+
+
+            TableDataSource table = report1.GetDataSource("Table") as TableDataSource;
+            table.SelectCommand = SQL1.ToString();
+
+            report1.Preview = previewControl1;
+            report1.Show();
+        }
+
+     
+
         #endregion
 
         #region BUTTON
@@ -300,6 +364,10 @@ namespace TKQC
         private void button2_Click(object sender, EventArgs e)
         {
             UPDATEQCPURTH(textBox1.Text.Trim(), textBox4.Text.Trim(), textBox9.Text.Trim(), textBox5.Text.Trim(), textBox7.Text.Trim(), textBox6.Text.Trim(), textBox8.Text.Trim(), textBox10.Text.Trim(), textBox11.Text.Trim(), textBox12.Text.Trim(), textBox13.Text.Trim(), textBox14.Text.Trim());
+        }
+        private void button3_Click(object sender, EventArgs e)
+        {
+            SETFASTREPORT(dateTimePicker3.Value.ToString("yyyyMMdd"),dateTimePicker4.Value.ToString("yyyyMMdd"));
         }
         #endregion
 
