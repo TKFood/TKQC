@@ -44,7 +44,8 @@ namespace TKQC
         int rownum = 0;
         int result;
 
-
+        int ROWSINDEX = 0;
+        int COLUMNSINDEX = 0;
         public FrmQCCHECKCOPTH()
         {
             InitializeComponent();
@@ -118,6 +119,27 @@ namespace TKQC
                     dataGridView1.AutoResizeColumns();
                     //dataGridView1.CurrentCell = dataGridView1[0, rownum];
 
+                    if (ROWSINDEX > 0 || COLUMNSINDEX > 0)
+                    {
+                        dataGridView1.CurrentCell = dataGridView1.Rows[ROWSINDEX].Cells[COLUMNSINDEX];
+
+                        DataGridViewRow row = dataGridView1.Rows[ROWSINDEX];
+                        textBox1.Text = row.Cells["TH001"].Value.ToString() + row.Cells["TH002"].Value.ToString() + row.Cells["TH003"].Value.ToString();
+                        textBox2.Text = row.Cells["品名"].Value.ToString();
+                        textBox3.Text = row.Cells["進貨數量"].Value.ToString();
+                        textBox4.Text = row.Cells["是否允收"].Value.ToString();
+                        textBox5.Text = row.Cells["運輸車"].Value.ToString();
+                        textBox6.Text = row.Cells["提供COA"].Value.ToString();
+                        textBox7.Text = row.Cells["檢驗項目"].Value.ToString();
+                        textBox8.Text = row.Cells["內部檢驗"].Value.ToString();
+                        textBox9.Text = row.Cells["抽樣數量"].Value.ToString();
+                        textBox10.Text = row.Cells["合格數量"].Value.ToString();
+                        textBox11.Text = row.Cells["退貨數量"].Value.ToString();
+                        textBox12.Text = row.Cells["日期"].Value.ToString();
+                        textBox13.Text = row.Cells["驗收人員"].Value.ToString();
+                        textBox14.Text = row.Cells["備註"].Value.ToString();
+
+                    }
                 }
                 else
                 {
@@ -158,7 +180,10 @@ namespace TKQC
                     textBox14.Text = row.Cells["備註"].Value.ToString();
 
 
+                    ROWSINDEX = dataGridView1.CurrentCell.RowIndex;
+                    COLUMNSINDEX = dataGridView1.CurrentCell.ColumnIndex;
 
+                    rowindex = ROWSINDEX;
 
                     ;
                 }
