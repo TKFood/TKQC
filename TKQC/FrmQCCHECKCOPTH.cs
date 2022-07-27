@@ -351,7 +351,71 @@ namespace TKQC
         }
 
      
+        public void UPDATETKPURTH()
+        {
+            try
+            {
+                //20210902密
+                Class1 TKID = new Class1();//用new 建立類別實體
+                SqlConnectionStringBuilder sqlsb = new SqlConnectionStringBuilder(ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString);
 
+                //資料庫使用者密碼解密
+                sqlsb.Password = TKID.Decryption(sqlsb.Password);
+                sqlsb.UserID = TKID.Decryption(sqlsb.UserID);
+
+                String connectionString;
+                sqlConn = new SqlConnection(sqlsb.ConnectionString);
+
+
+                sqlConn.Close();
+                sqlConn.Open();
+                tran = sqlConn.BeginTransaction();
+
+                sbSql.Clear();
+
+                sbSql.AppendFormat(@" 
+                                    UPDATE [TK].dbo.PURTH
+                                    SET UDF01='Y'
+                                    WHERE UDF01<>'Y'
+                                    AND [TH001]+[TH002]+[TH003] IN (SELECT [TH001]+[TH002]+[TH003] FROM [TKQC].[dbo].[QCPURTH] WHERE [ISIN]='Y')
+
+                                    UPDATE [TK].dbo.PURTH
+                                    SET UDF01='N'
+                                    WHERE UDF01<>'N'
+                                    AND [TH001]+[TH002]+[TH003] IN (SELECT [TH001]+[TH002]+[TH003] FROM [TKQC].[dbo].[QCPURTH] WHERE [ISIN]='N')
+
+                                        ");
+
+
+
+                cmd.Connection = sqlConn;
+                cmd.CommandTimeout = 60;
+                cmd.CommandText = sbSql.ToString();
+                cmd.Transaction = tran;
+                result = cmd.ExecuteNonQuery();
+
+                if (result == 0)
+                {
+                    tran.Rollback();    //交易取消
+                }
+                else
+                {
+                    tran.Commit();      //執行交易  
+                                        //UPDATEMOCMANULINETEMP(NEWGUID, TEMPds);
+
+                }
+
+            }
+            catch
+            {
+
+            }
+
+            finally
+            {
+                sqlConn.Close();
+            }
+        }
         #endregion
 
         #region BUTTON
@@ -364,6 +428,9 @@ namespace TKQC
         private void button2_Click(object sender, EventArgs e)
         {
             UPDATEQCPURTH(textBox1.Text.Trim(), textBox4.Text.Trim(), textBox9.Text.Trim(), textBox5.Text.Trim(), textBox7.Text.Trim(), textBox6.Text.Trim(), textBox8.Text.Trim(), textBox10.Text.Trim(), textBox11.Text.Trim(), textBox12.Text.Trim(), textBox13.Text.Trim(), textBox14.Text.Trim());
+
+            //更新ERP進貨單單身，是否經品保檢驗 
+            UPDATETKPURTH();
         }
         private void button3_Click(object sender, EventArgs e)
         {
