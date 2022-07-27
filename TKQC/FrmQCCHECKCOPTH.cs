@@ -350,7 +350,56 @@ namespace TKQC
             report1.Show();
         }
 
-     
+        public void SETFASTREPORT2(string SDATES, string EDATES)
+        {
+            StringBuilder SQL1 = new StringBuilder();
+
+            SQL1.AppendFormat(@"  
+                             
+                               SELECT 
+                                MA002 AS '供應廠商'
+                                ,TD001 AS '單別'
+                                ,TD002 AS '單號'
+                                ,TD003 AS '序號'
+                                ,TD004 AS '品號'
+                                ,TD005 AS '品名'
+                                ,TD006 AS '規格'
+                                ,TD008 AS '採購數量'
+                                ,TD009 AS '單位'
+                                ,TD012 AS '預交日'
+                                FROM [TK].dbo.PURTC,[TK].dbo.PURTD,[TK].dbo.PURMA
+                                WHERE TC001=TD001 AND TC002=TD002
+                                AND MA001=TC004
+                                AND TD012>='{0}' AND TD012<='{1}'
+                                ORDER BY TD012
+                                
+                                ", SDATES, EDATES);
+
+            Report report1 = new Report();
+            report1.Load(@"REPORT\採購預計到貨表.frx");
+
+            //20210902密
+            Class1 TKID = new Class1();//用new 建立類別實體
+            SqlConnectionStringBuilder sqlsb = new SqlConnectionStringBuilder(ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString);
+
+            //資料庫使用者密碼解密
+            sqlsb.Password = TKID.Decryption(sqlsb.Password);
+            sqlsb.UserID = TKID.Decryption(sqlsb.UserID);
+
+            String connectionString;
+            SqlConnection sqlConn = new SqlConnection(sqlsb.ConnectionString);
+
+            report1.Dictionary.Connections[0].ConnectionString = sqlsb.ConnectionString;
+
+
+            TableDataSource table = report1.GetDataSource("Table") as TableDataSource;
+            table.SelectCommand = SQL1.ToString();
+
+            report1.Preview = previewControl2;
+            report1.Show();
+        }
+
+
         public void UPDATETKPURTH()
         {
             try
@@ -439,6 +488,10 @@ namespace TKQC
         private void button3_Click(object sender, EventArgs e)
         {
             SETFASTREPORT(dateTimePicker3.Value.ToString("yyyyMMdd"),dateTimePicker4.Value.ToString("yyyyMMdd"));
+        }
+        private void button4_Click(object sender, EventArgs e)
+        {
+            SETFASTREPORT2(dateTimePicker5.Value.ToString("yyyyMMdd"), dateTimePicker6.Value.ToString("yyyyMMdd"));
         }
         #endregion
 
