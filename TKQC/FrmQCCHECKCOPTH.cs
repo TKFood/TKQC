@@ -72,34 +72,34 @@ namespace TKQC
 
 
                 sbSql.AppendFormat(@"  
-                                   SELECT 
-
-                                    [TH001]
+                                    SELECT 
+                                   
+                                    [ISIN] AS '是否允收'
+                                    ,[TG003] AS '進貨日期'
+                                    ,[TG005] AS '廠商代'
+                                    ,[TG021] AS '廠商名稱'
+                                    ,[TH004] AS '品號'
+                                    ,[TH005] AS '品名'
+                                    ,[TH006] AS '規格'
+                                    ,[TH007] AS '進貨數量'
+                                    ,[TH008] AS '單位'
+                                    ,[TH009] AS '庫別'
+                                    ,[SAMPLENUMS] AS '抽樣數量'
+                                    ,[CARNO] AS '運輸車'
+                                    ,[CHECKITEMS] AS '檢驗項目'
+                                    ,[COA] AS '提供COA'
+                                    ,[INNERCHECKS] AS '內部檢驗'
+                                    ,[INUMS] AS '合格數量'
+                                    ,[BACKNUMS] AS '退貨數量'
+                                    ,[DATES] AS '日期'
+                                    ,[QCMAN] AS '驗收人員'
+                                    ,[COMMENTS] AS '備註'
+                                    ,[TH001]
                                     ,[TH002]
                                     ,[TH003]
-                                    ,[TG003]
-                                    ,[TG005]
-                                    ,[TG021]
-                                    ,[TH004]
-                                    ,[TH005]
-                                    ,[TH006]
-                                    ,[TH007]
-                                    ,[TH008]
-                                    ,[TH009]
-                                    ,[SAMPLENUMS]
-                                    ,[CARNO]
-                                    ,[CHECKITEMS]
-                                    ,[COA]
-                                    ,[INNERCHECKS]
-                                    ,[INUMS]
-                                    ,[BACKNUMS]
-                                    ,[DATES]
-                                    ,[QCMAN]
-                                    ,[COMMENTS]
-                                    ,[ISIN]
-
 
                                     FROM [TKQC].[dbo].[QCPURTH]
+                                    WHERE [TG003]>='{0}' AND [TG003]<='{1}'
 
                                     ", SDATES, EDATES);
 
@@ -134,6 +134,135 @@ namespace TKQC
 
             }
         }
+        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dataGridView1.CurrentRow != null)
+            {
+                int rowindex = dataGridView1.CurrentRow.Index;
+                if (rowindex >= 0)
+                {
+                    DataGridViewRow row = dataGridView1.Rows[rowindex];
+                    textBox1.Text = row.Cells["TH001"].Value.ToString()+ row.Cells["TH002"].Value.ToString()+ row.Cells["TH003"].Value.ToString();
+                    textBox2.Text = row.Cells["品名"].Value.ToString();
+                    textBox3.Text = row.Cells["進貨數量"].Value.ToString();
+                    textBox4.Text = row.Cells["是否允收"].Value.ToString();
+                    textBox5.Text = row.Cells["運輸車"].Value.ToString();
+                    textBox6.Text = row.Cells["提供COA"].Value.ToString();
+                    textBox7.Text = row.Cells["檢驗項目"].Value.ToString();
+                    textBox8.Text = row.Cells["內部檢驗"].Value.ToString();
+                    textBox9.Text = row.Cells["抽樣數量"].Value.ToString();
+                    textBox10.Text = row.Cells["合格數量"].Value.ToString();
+                    textBox11.Text = row.Cells["退貨數量"].Value.ToString();
+                    textBox12.Text = row.Cells["日期"].Value.ToString();
+                    textBox13.Text = row.Cells["驗收人員"].Value.ToString();
+                    textBox14.Text = row.Cells["備註"].Value.ToString();
+
+
+
+
+                    ;
+                }
+                else
+                {
+                    textBox1.Text = "";
+                    textBox2.Text = "";
+                    textBox3.Text = "";
+                    textBox4.Text = "";
+                    textBox5.Text = "";
+                    textBox6.Text = "";
+                    textBox7.Text = "";
+                    textBox8.Text = "";
+                    textBox9.Text = ""; 
+                    textBox10.Text = "";
+                    textBox11.Text = "";
+                    textBox12.Text = "";
+                    textBox13.Text = "";
+                    textBox14.Text = "";
+
+                }
+            }
+        }
+
+        public void UPDATEQCPURTH(string TH001TH002TH003, string ISIN, string SAMPLENUMS, string CARNO, string CHECKITEMS, string COA, string INNERCHECKS, string INUMS, string BACKNUMS, string DATES, string QCMAN, string COMMENTS)
+        {
+            try
+            {
+                //20210902密
+                Class1 TKID = new Class1();//用new 建立類別實體
+                SqlConnectionStringBuilder sqlsb = new SqlConnectionStringBuilder(ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString);
+
+                //資料庫使用者密碼解密
+                sqlsb.Password = TKID.Decryption(sqlsb.Password);
+                sqlsb.UserID = TKID.Decryption(sqlsb.UserID);
+
+                String connectionString;
+                sqlConn = new SqlConnection(sqlsb.ConnectionString);
+
+
+                sqlConn.Close();
+                sqlConn.Open();
+                tran = sqlConn.BeginTransaction();
+
+                sbSql.Clear();
+
+                sbSql.AppendFormat(@" 
+                                    UPDATE [TKQC].[dbo].[QCPURTH]
+                                    SET [ISIN]='{1}'
+                                    ,[SAMPLENUMS]='{2}'
+                                    ,[CARNO]='{3}'
+                                    ,[CHECKITEMS]='{4}'
+                                    ,[COA]='{5}'
+                                    ,[INNERCHECKS]='{6}'
+                                    ,[INUMS]='{7}'
+                                    ,[BACKNUMS]='{8}'
+                                    ,[DATES]='{9}'
+                                    ,[QCMAN]='{10}'
+                                    ,[COMMENTS]='{11}'
+                                    WHERE [TH001]+[TH002]+[TH003]='{0}'
+                                        ", TH001TH002TH003
+                                        , ISIN
+                                        , SAMPLENUMS
+                                        , CARNO
+                                        , CHECKITEMS
+                                        , COA
+                                        , INNERCHECKS
+                                        , INUMS
+                                        , BACKNUMS
+                                        , DATES
+                                        , QCMAN
+                                        , COMMENTS);
+
+
+
+                cmd.Connection = sqlConn;
+                cmd.CommandTimeout = 60;
+                cmd.CommandText = sbSql.ToString();
+                cmd.Transaction = tran;
+                result = cmd.ExecuteNonQuery();
+
+                if (result == 0)
+                {
+                    tran.Rollback();    //交易取消
+                }
+                else
+                {
+                    tran.Commit();      //執行交易  
+                                        //UPDATEMOCMANULINETEMP(NEWGUID, TEMPds);
+
+                }
+
+            }
+            catch
+            {
+
+            }
+
+            finally
+            {
+                sqlConn.Close();
+            }
+        }
+
         #endregion
 
         #region BUTTON
@@ -143,6 +272,12 @@ namespace TKQC
             Search(dateTimePicker1.Value.ToString("yyyyMMdd"), dateTimePicker2.Value.ToString("yyyyMMdd"));
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            UPDATEQCPURTH(textBox1.Text.Trim(), textBox4.Text.Trim(), textBox9.Text.Trim(), textBox5.Text.Trim(), textBox7.Text.Trim(), textBox6.Text.Trim(), textBox8.Text.Trim(), textBox10.Text.Trim(), textBox11.Text.Trim(), textBox12.Text.Trim(), textBox13.Text.Trim(), textBox14.Text.Trim());
+        }
         #endregion
+
+
     }
 }
