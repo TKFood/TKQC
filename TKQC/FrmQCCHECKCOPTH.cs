@@ -424,14 +424,14 @@ namespace TKQC
 
                 sbSql.AppendFormat(@" 
                                     UPDATE [TK].dbo.PURTH
-                                    SET UDF01='Y'
-                                    WHERE UDF01<>'Y'
+                                    SET UDF01='Y',TH028='2'
+                                    WHERE TH028<>'2'
                                     AND [TH001]+[TH002]+[TH003] IN (SELECT [TH001]+[TH002]+[TH003] FROM [TKQC].[dbo].[QCPURTH] WHERE [ISIN]='Y')
 
                                     
                                     UPDATE [TK].dbo.PURTH
-                                    SET UDF01=''
-                                    WHERE ISNULL(UDF01,'')<>''
+                                    SET UDF01='',TH028='1'
+                                    WHERE TH028<>'1'
                                     AND [TH001]+[TH002]+[TH003] IN (SELECT [TH001]+[TH002]+[TH003] FROM [TKQC].[dbo].[QCPURTH] WHERE [ISIN]='N')
 
 
