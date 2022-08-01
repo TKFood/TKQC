@@ -351,33 +351,62 @@ namespace TKQC
             report1.Show();
         }
 
-        public void SETFASTREPORT2(string SDATES, string EDATES)
+        public void SETFASTREPORT2(string SDATES, string EDATES,string KINDS)
         {
             StringBuilder SQL1 = new StringBuilder();
+            StringBuilder SQL1QUEERY = new StringBuilder();
+
+            //            SELECT
+            //             MA002 AS '供應廠商'
+            //                                ,TD001 AS '單別'
+            //                                ,TD002 AS '單號'
+            //                                ,TD003 AS '序號'
+            //                                ,TD004 AS '品號'
+            //                                ,TD005 AS '品名'
+            //                                ,TD006 AS '規格'
+            //                                ,TD008 AS '採購數量'
+            //                                ,TD009 AS '單位'
+            //                                ,TD012 AS '預交日'
+            //                                FROM[TK].dbo.PURTC,[TK].dbo.PURTD,[TK].dbo.PURMA
+            //WHERE TC001=TD001 AND TC002=TD002
+            //AND MA001=TC004
+            //AND TD012>='{0}' AND TD012<='{1}'
+            //                                ORDER BY TD012
+
+
+            if (KINDS.Equals("原料"))
+            {
+                SQL1QUEERY.AppendFormat(@"
+                                        AND TD004 LIKE '1%'
+                                        ");
+            }
+            else if (KINDS.Equals("物料"))
+            {
+                SQL1QUEERY.AppendFormat(@"
+                                        AND TD004 LIKE '2%'
+                                        ");
+            }
+            else
+            {
+                SQL1QUEERY.AppendFormat(@"
+                
+                                        ");
+            }
 
             SQL1.AppendFormat(@"  
-                             
-                               SELECT 
-                                MA002 AS '供應廠商'
-                                ,TD001 AS '單別'
-                                ,TD002 AS '單號'
-                                ,TD003 AS '序號'
-                                ,TD004 AS '品號'
-                                ,TD005 AS '品名'
-                                ,TD006 AS '規格'
-                                ,TD008 AS '採購數量'
-                                ,TD009 AS '單位'
-                                ,TD012 AS '預交日'
+                                SELECT TD012 AS '進貨日期',MA002 AS '廠商名稱',TD004 AS '品號',TD005 AS '品名',TD006 AS '規格',TD009 AS '單位'
                                 FROM [TK].dbo.PURTC,[TK].dbo.PURTD,[TK].dbo.PURMA
                                 WHERE TC001=TD001 AND TC002=TD002
-                                AND MA001=TC004
+                                AND TC004=MA001
+                                {2}
                                 AND TD012>='{0}' AND TD012<='{1}'
-                                ORDER BY TD012
+                                GROUP BY TD012,MA002,TD004,TD005,TD006,TD009
+                                ORDER BY TD012,TD004
                                 
-                                ", SDATES, EDATES);
+                                ", SDATES, EDATES, SQL1QUEERY.ToString());
 
             Report report1 = new Report();
-            report1.Load(@"REPORT\採購預計到貨表.frx");
+            report1.Load(@"REPORT\原物料品質驗收單v2.frx");
 
             //20210902密
             Class1 TKID = new Class1();//用new 建立類別實體
@@ -507,7 +536,7 @@ namespace TKQC
         }
         private void button4_Click(object sender, EventArgs e)
         {
-            SETFASTREPORT2(dateTimePicker5.Value.ToString("yyyyMMdd"), dateTimePicker6.Value.ToString("yyyyMMdd"));
+            SETFASTREPORT2(dateTimePicker5.Value.ToString("yyyyMMdd"), dateTimePicker6.Value.ToString("yyyyMMdd"), comboBox1.Text.ToString());
         }
         #endregion
 

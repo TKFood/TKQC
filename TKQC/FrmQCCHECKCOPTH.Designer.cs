@@ -87,6 +87,9 @@
             this.dateTimePicker6 = new System.Windows.Forms.DateTimePicker();
             this.label20 = new System.Windows.Forms.Label();
             this.previewControl2 = new FastReport.Preview.PreviewControl();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -116,9 +119,9 @@
             // 
             // tabControl1
             // 
+            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
@@ -777,11 +780,14 @@
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
-            this.tableLayoutPanel4.Controls.Add(this.label19, 0, 1);
-            this.tableLayoutPanel4.Controls.Add(this.dateTimePicker5, 1, 1);
-            this.tableLayoutPanel4.Controls.Add(this.button4, 4, 1);
-            this.tableLayoutPanel4.Controls.Add(this.dateTimePicker6, 3, 1);
-            this.tableLayoutPanel4.Controls.Add(this.label20, 2, 1);
+            this.tableLayoutPanel4.Controls.Add(this.dateTimePicker5, 1, 0);
+            this.tableLayoutPanel4.Controls.Add(this.label20, 2, 0);
+            this.tableLayoutPanel4.Controls.Add(this.dateTimePicker6, 3, 0);
+            this.tableLayoutPanel4.Controls.Add(this.button4, 4, 0);
+            this.tableLayoutPanel4.Controls.Add(this.label21, 0, 0);
+            this.tableLayoutPanel4.Controls.Add(this.label19, 0, 2);
+            this.tableLayoutPanel4.Controls.Add(this.label22, 0, 1);
+            this.tableLayoutPanel4.Controls.Add(this.comboBox1, 1, 1);
             this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
@@ -797,7 +803,7 @@
             // 
             this.label19.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(3, 52);
+            this.label19.Location = new System.Drawing.Point(3, 106);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(85, 16);
             this.label19.TabIndex = 34;
@@ -808,7 +814,7 @@
             this.dateTimePicker5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.dateTimePicker5.CustomFormat = "yyyy/MM/dd";
             this.dateTimePicker5.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker5.Location = new System.Drawing.Point(94, 46);
+            this.dateTimePicker5.Location = new System.Drawing.Point(94, 6);
             this.dateTimePicker5.Name = "dateTimePicker5";
             this.dateTimePicker5.Size = new System.Drawing.Size(128, 27);
             this.dateTimePicker5.TabIndex = 36;
@@ -817,7 +823,7 @@
             // 
             this.button4.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button4.ForeColor = System.Drawing.Color.Black;
-            this.button4.Location = new System.Drawing.Point(483, 43);
+            this.button4.Location = new System.Drawing.Point(483, 3);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(114, 34);
             this.button4.TabIndex = 31;
@@ -830,7 +836,7 @@
             this.dateTimePicker6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.dateTimePicker6.CustomFormat = "yyyy/MM/dd";
             this.dateTimePicker6.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker6.Location = new System.Drawing.Point(363, 46);
+            this.dateTimePicker6.Location = new System.Drawing.Point(363, 6);
             this.dateTimePicker6.Name = "dateTimePicker6";
             this.dateTimePicker6.Size = new System.Drawing.Size(114, 27);
             this.dateTimePicker6.TabIndex = 37;
@@ -839,7 +845,7 @@
             // 
             this.label20.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(228, 52);
+            this.label20.Location = new System.Drawing.Point(228, 12);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(129, 16);
             this.label20.TabIndex = 38;
@@ -856,6 +862,40 @@
             this.previewControl2.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.previewControl2.Size = new System.Drawing.Size(972, 511);
             this.previewControl2.TabIndex = 2;
+            // 
+            // label21
+            // 
+            this.label21.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(3, 12);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(85, 16);
+            this.label21.TabIndex = 39;
+            this.label21.Text = "日期";
+            // 
+            // label22
+            // 
+            this.label22.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(3, 52);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(85, 16);
+            this.label22.TabIndex = 40;
+            this.label22.Text = "類別";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "原料",
+            "物料",
+            "全部"});
+            this.comboBox1.Location = new System.Drawing.Point(94, 50);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(128, 24);
+            this.comboBox1.TabIndex = 41;
+            this.comboBox1.Text = "原料";
             // 
             // FrmQCCHECKCOPTH
             // 
@@ -961,5 +1001,8 @@
         private System.Windows.Forms.DateTimePicker dateTimePicker6;
         private System.Windows.Forms.Label label20;
         private FastReport.Preview.PreviewControl previewControl2;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }
