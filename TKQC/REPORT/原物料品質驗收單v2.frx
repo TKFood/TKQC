@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReportInfo.Created="07/27/2022 11:56:39" ReportInfo.Modified="08/01/2022 15:06:42" ReportInfo.CreatorVersion="2016.4.4.0">
+<Report ScriptLanguage="CSharp" ReportInfo.Created="07/27/2022 11:56:39" ReportInfo.Modified="08/01/2022 16:49:18" ReportInfo.CreatorVersion="2016.4.4.0">
   <Dictionary>
-    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqHwzMSgwTFaHpjtG3vsOj8Zy6q+uhwpDsytgWqwZQZyEQUQyQ022aWUGqU90pHzzNjHuzu89K+RQ2LIBVx1fpgNkNJhwC4eetn2/Uy0fMrO7zDUE5AmRb+0bcYI+lxqpN+i5gA3VDGcwlcfm6L9ZMsLrZ3U+wEDtHCQtd9vw2XUEnKu10UoJ+Sop9bnSzFW0Z">
+    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqHwzMSgwTFaHpjtG3vsOj8Zy6q+uhwpDsytgWqwZQZyEQUQyQ022aWUGqU90pHzzNjHuzu89K+RQ2LIBVx1fpgNkNJhwC4eetn2/Uy0fMrO7zDUE5AmRb+0bcYI+lxqpN+i5gA3VDGcwlcfm6L9ZMsLrZ3U+wEDtHCQtd9vw2XUF1HibP432IEQZZDQC9XY03">
       <TableDataSource Name="Table" DataType="System.Int32" Enabled="true" SelectCommand="SELECT TD012 AS '進貨日期',MA002 AS '廠商名稱',TD004 AS '品號',TD005 AS '品名',TD006 AS '規格',TD009 AS '單位'&#13;&#10;FROM [TK].dbo.PURTC,[TK].dbo.PURTD,[TK].dbo.PURMA&#13;&#10;WHERE TC001=TD001 AND TC002=TD002&#13;&#10;AND TC004=MA001&#13;&#10;AND TD004 LIKE '1%'&#13;&#10;AND TD012&gt;='20220801' AND TD012&lt;='20220831'&#13;&#10;GROUP BY TD012,MA002,TD004,TD005,TD006,TD009&#13;&#10;ORDER BY TD012">
         <Column Name="進貨日期" DataType="System.String"/>
         <Column Name="廠商名稱" DataType="System.String"/>
