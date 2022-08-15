@@ -55,7 +55,7 @@ namespace TKQC
         public void SETFASTREPORT(string SDATES, string EDATES)
         {
             StringBuilder SQL1 = new StringBuilder();
-
+                
             SQL1.AppendFormat(@"  
                              
                             SELECT TB001 AS '單別',TB002 AS '單號',TB003 AS '序號',TB004 AS '品號',TB005 AS '品名',TB006 AS '規格',TB007 AS '數量',TB008 AS '單位',TB014 AS '批號',TA005 AS '單頭備註',TB017 AS '單身備註'
