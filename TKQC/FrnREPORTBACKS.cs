@@ -52,12 +52,24 @@ namespace TKQC
 
         #region FUNCTION     
 
-        public void SETFASTREPORT(string SDATES, string EDATES)
+        public void SETFASTREPORT(string SDATES, string EDATES,string NO)
         {
             StringBuilder SQL1 = new StringBuilder();
-                
+            StringBuilder SQLQUERY = new StringBuilder();
+
+            if(!string.IsNullOrEmpty(NO))
+            {
+                SQLQUERY.AppendFormat(@"  AND 單號 LIKE '%{0}%' ", NO);
+            }
+            else
+            {
+                SQLQUERY.AppendFormat(@" ");
+            }
+
             SQL1.AppendFormat(@"  
                              
+                            SELECT *
+                            FROM(
                             SELECT TB001 AS '單別',TB002 AS '單號',TB003 AS '序號',TB004 AS '品號',TB005 AS '品名',TB006 AS '規格',TB007 AS '數量',TB008 AS '單位',TB014 AS '批號',TA005 AS '單頭備註',TB017 AS '單身備註'
                             FROM [TK].dbo.INVTA,[TK].dbo.INVTB
                             WHERE TA001=TB001 AND TA002=TB002
@@ -82,8 +94,11 @@ namespace TKQC
                             FROM [TK].dbo.PURTI,[TK].dbo.PURTJ
                             WHERE TI001=TJ001 AND TI002=TJ002
                             AND TI003>='{0}' AND TI003<='{1}'
+                            ) AS TEMP
+                            WHERE 1=1
+                            {2}
                                 
-                                ", SDATES, EDATES);
+                                ", SDATES, EDATES, SQLQUERY.ToString());
 
             Report report1 = new Report();
             report1.Load(@"REPORT\品質判定報告.frx");
@@ -116,7 +131,7 @@ namespace TKQC
 
         private void button4_Click(object sender, EventArgs e)
         {
-            SETFASTREPORT(dateTimePicker1.Value.ToString("yyyyMMdd"), dateTimePicker2.Value.ToString("yyyyMMdd"));
+            SETFASTREPORT(dateTimePicker1.Value.ToString("yyyyMMdd"), dateTimePicker2.Value.ToString("yyyyMMdd"),textBox1.Text.Trim());
         }
         #endregion
     }
