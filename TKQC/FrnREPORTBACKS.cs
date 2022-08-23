@@ -56,7 +56,7 @@ namespace TKQC
         {
             StringBuilder SQL1 = new StringBuilder();
             StringBuilder SQLQUERY = new StringBuilder();
-
+             
             if(!string.IsNullOrEmpty(NO))
             {
                 SQLQUERY.AppendFormat(@"  AND 單號 LIKE '%{0}%' ", NO);
