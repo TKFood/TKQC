@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" DoublePass="true" ReportInfo.Created="08/15/2022 15:25:18" ReportInfo.Modified="08/23/2022 09:50:36" ReportInfo.CreatorVersion="2016.4.4.0">
+<Report ScriptLanguage="CSharp" DoublePass="true" ReportInfo.Created="08/15/2022 15:25:18" ReportInfo.Modified="08/23/2022 10:49:12" ReportInfo.CreatorVersion="2016.4.4.0">
   <ScriptText>using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -35,7 +35,7 @@ namespace FastReport
 }
 </ScriptText>
   <Dictionary>
-    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqHwzMSgwTFaHpjtG3vsOj8Zy6q+uhwpDsytgWqwZQZyEQUQyQ022aWUGqU90pHzzNjHuzu89K+RQ2LIBVx1fpgNkNJhwC4eetn2/Uy0fMrO7zDUE5AmRb+0bcYI+lxqpN+i5gA3VDGcwlcfm6L9ZMsLrZ3U+wEDtHCQtd9vw2XUHsz84kw15M1w0iBRT1G7SR">
+    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqHwzMSgwTFaHpjtG3vsOj8Zy6q+uhwpDsytgWqwZQZyEQUQyQ022aWUGqU90pHzzNjHuzu89K+RQ2LIBVx1fpgNkNJhwC4eetn2/Uy0fMrO7zDUE5AmRb+0bcYI+lxqpN+i5gA3VDGcwlcfm6L9ZMsLrZ3U+wEDtHCQtd9vw2XUFFFtq+jL8KJi7T5NiVYL9x">
       <TableDataSource Name="Table" DataType="System.Int32" Enabled="true" SelectCommand="&#13;&#10;SELECT TB001 AS '單別',TB002 AS '單號',TB003 AS '序號',TB004 AS '品號',TB005 AS '品名',TB006 AS '規格',TB007 AS '數量',TB008 AS '單位',TB014 AS '批號',TA005 AS '單頭備註',TB017 AS '單身備註'&#13;&#10;FROM [TK].dbo.INVTA,[TK].dbo.INVTB&#13;&#10;WHERE TA001=TB001 AND TA002=TB002&#13;&#10;AND TA001 IN ('A122','A123','A130')&#13;&#10;AND TB013='20007'&#13;&#10;AND TA003&gt;='20220701' AND TA003&lt;='20220901'&#13;&#10;UNION ALL&#13;&#10;SELECT TI001,TI002,TI003,TI004,TI005,TI006,TI009,TI010,TI017,TH014,TI021&#13;&#10;FROM [TK].dbo.INVTH,[TK].dbo.INVTI&#13;&#10;WHERE TH001=TI001 AND TH002=TI002&#13;&#10;AND TH001 IN ('A151')&#13;&#10;AND TI008='20007'&#13;&#10;AND TH003&gt;='20220701' AND TH003&lt;='20220901'&#13;&#10;UNION ALL&#13;&#10;SELECT TJ001,TJ002,TJ003,TJ004,TJ005,TJ006,TJ007,TJ008,TJ014,TI020,TJ023&#13;&#10;FROM [TK].dbo.COPTI,[TK].dbo.COPTJ&#13;&#10;WHERE TI001=TJ001 AND TI002=TJ002&#13;&#10;AND TJ013='20007'&#13;&#10;AND TI003&gt;='20220701' AND TI003&lt;='20220901'&#13;&#10;UNION ALL&#13;&#10;SELECT TJ001,TJ002,TJ003,TJ004,TJ005,TJ006,TJ009,TJ007,TJ012,TI012,TJ019&#13;&#10;FROM [TK].dbo.PURTI,[TK].dbo.PURTJ&#13;&#10;WHERE TI001=TJ001 AND TI002=TJ002&#13;&#10;AND TI003&gt;='20220701' AND TI003&lt;='20220901'">
         <Column Name="單別" DataType="System.String"/>
         <Column Name="單號" DataType="System.String"/>
