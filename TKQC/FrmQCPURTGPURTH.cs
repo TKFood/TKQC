@@ -91,6 +91,7 @@ namespace TKQC
                             ,[DETAIL04] AS '內部檢驗'
                             ,[DETAIL05] AS '驗退數量'
                             ,[DETAIL06] AS '備註'
+                            ,[Applicantname]
                             FROM [TKQC].[dbo].[UOFQCPURTGPURTH]
                             WHERE [TG003]>='{0}' AND [TG003]<='{1}'
                             {2}
