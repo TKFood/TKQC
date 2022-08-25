@@ -63,7 +63,7 @@ namespace TKQC
             }
             else
             {
-                SQLQUERY.AppendFormat(@" ");
+                SQLQUERY.AppendFormat(@"  ");
             }
 
             SQL1.AppendFormat(@"  
