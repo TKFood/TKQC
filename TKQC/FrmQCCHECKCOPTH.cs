@@ -394,19 +394,23 @@ namespace TKQC
             }
 
             SQL1.AppendFormat(@"  
-                                SELECT TD012 AS '進貨日期',MA002 AS '廠商名稱',TD004 AS '品號',TD005 AS '品名',TD006 AS '規格',TD009 AS '單位'
-                                FROM [TK].dbo.PURTC,[TK].dbo.PURTD,[TK].dbo.PURMA
+                                SELECT 
+                                MC002 AS '倉別',TD007 AS '倉別ID'
+                                ,TD012 AS '預交期',MA002 AS '廠商名稱',TD004 AS '品號',TD005 AS '品名',TD006 AS '規格',TD008 AS '採購數量',TD009 AS '單位',TD014 AS '備註'
+                                FROM [TK].dbo.PURTC,[TK].dbo.PURTD,[TK].dbo.PURMA,[TK].dbo.CMSMC
                                 WHERE TC001=TD001 AND TC002=TD002
                                 AND TC004=MA001
-                                {2}
+                                AND MC001=TD007
+
                                 AND TD012>='{0}' AND TD012<='{1}'
-                                GROUP BY TD012,MA002,TD004,TD005,TD006,TD009
-                                ORDER BY TD012,TD004
+                                {2} 
+
+                                ORDER BY MC002,TD007,TD012,TD004
                                 
                                 ", SDATES, EDATES, SQL1QUEERY.ToString());
 
             Report report1 = new Report();
-            report1.Load(@"REPORT\原物料品質驗收單v2.frx");
+            report1.Load(@"REPORT\QC採購預計到貨表.frx");
 
             //20210902密
             Class1 TKID = new Class1();//用new 建立類別實體
