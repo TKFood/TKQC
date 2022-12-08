@@ -122,7 +122,7 @@ namespace TKQC
             TableDataSource table = report1.GetDataSource("Table") as TableDataSource;
             table.SelectCommand = SQL1.ToString();
 
-            report1.Preview = previewControl1;
+            report1.Preview = previewControl1; 
             report1.Show();  
         }
         #endregion

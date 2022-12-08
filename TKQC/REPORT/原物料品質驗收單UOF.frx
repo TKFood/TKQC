@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" ReportInfo.Created="08/25/2022 08:18:44" ReportInfo.Modified="12/08/2022 16:32:33" ReportInfo.CreatorVersion="2016.4.4.0">
+<Report ScriptLanguage="CSharp" ReportInfo.Created="08/25/2022 08:18:44" ReportInfo.Modified="12/08/2022 16:56:44" ReportInfo.CreatorVersion="2016.4.4.0">
   <Dictionary>
-    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqHwzMSgwTFaHpjtG3vsOj8Zy6q+uhwpDsytgWqwZQZyEQUQyQ022aWUGqU90pHzzNjHuzu89K+RQ2LIBVx1fpgNkNJhwC4eetn2/Uy0fMrO7zDUE5AmRb+0bcYI+lxqpN+i5gA3VDGcwlcfm6L9ZMsLrZ3U+wEDtHCQtd9vw2XUG/GJrm1Y9nSb7Z/HyDfyZk">
+    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqHwzMSgwTFaHpjtG3vsOj8Zy6q+uhwpDsytgWqwZQZyEQUQyQ022aWUGqU90pHzzNjHuzu89K+RQ2LIBVx1fpgNkNJhwC4eetn2/Uy0fMrO7zDUE5AmRb+0bcYI+lxqpN+i5gA3VDGcwlcfm6L9ZMsLrZ3U+wEDtHCQtd9vw2XUGJy3r1alrXwfVsYJ1py0F7">
       <TableDataSource Name="Table" DataType="System.Int32" Enabled="true" SelectCommand="/****** SSMS 中 SelectTopNRows 命令的指令碼  ******/&#13;&#10;SELECT &#13;&#10; [ID] AS 'UOF表單編號'&#13;&#10;,[TG003] AS '進貨日期'&#13;&#10;,[TG005] AS '廠商'&#13;&#10;,[TG021] AS '廠商名稱'&#13;&#10;,[TG001] AS '單別'&#13;&#10;,[TG002] AS '單號'&#13;&#10;,[TH003] AS '序號'&#13;&#10;,[TH004] AS '品號'&#13;&#10;,[TH005] AS '品名'&#13;&#10;,[TH006] AS '規格'&#13;&#10;,[TH007] AS '進貨數量'&#13;&#10;,[TH008] AS '單位'&#13;&#10;,[TH010] AS '批號'&#13;&#10;,[TH015] AS '驗收數量'&#13;&#10;,[CHECK] AS '是否驗收'&#13;&#10;,[DETAIL01] AS '抽樣數量'&#13;&#10;,[DETAIL02] AS '檢驗項目'&#13;&#10;,[DETAIL03] AS '提供COA'&#13;&#10;,[DETAIL04] AS '內部檢驗'&#13;&#10;,[DETAIL05] AS '驗退數量'&#13;&#10;,[DETAIL06] AS '備註'&#13;&#10;,[Applicantname]&#13;&#10;FROM [TKQC].[dbo].[UOFQCPURTGPURTH]&#13;&#10;WHERE [TG003]&gt;='20220801' AND [TG003]&lt;='20220831'&#13;&#10;ORDER BY TG001,TG002,TH003">
         <Column Name="UOF表單編號" DataType="System.String"/>
         <Column Name="進貨日期" DataType="System.String"/>
@@ -68,7 +68,7 @@
       <TextObject Name="Text11" Left="472.83" Width="47.25" Height="18.9" Border.Lines="Right, Top, Bottom" CanGrow="true" GrowToBottom="true" Text="[Table.單位]" HorzAlign="Center" VertAlign="Center"/>
     </DataBand>
     <ReportSummaryBand Name="ReportSummary1" Top="117.48" Width="1047.06" Height="151.2">
-      <TextObject Name="Text33" Width="1030.05" Height="132.3" Text="判定方式：&#13;&#10; (1)檢驗項目：V-合格 X-不合格。如判定為不合格，請填寫異常項目於備註欄，並詳細說明或附上文件/照片。&#13;&#10;   檢驗項目說明：1-外觀  2-顏色  3-氣味  4-夾雜物(病媒)  5-印刷  6-黏合度  7-其他   8-其他 ，驗收有機產品之原料應確認該批次：(a)進口有機農產品同意文件 (b)有機證書有&#13;&#10;   效性 (c)農藥殘留報告 (d)核對原料規格表包裝及標示與實際產品相同。&#13;&#10; (2)內部檢驗：V-合格 X-不合格 N-無須內檢。&#13;&#10; 驗收標準依照A13-08-00-05原物料驗收條件。&#13;&#10;&#13;&#10;&#13;&#10;" VertAlign="Center"/>
+      <TextObject Name="Text33" Width="1030.05" Height="132.3" Text="判定方式：&#13;&#10; (1)檢驗項目：V-合格 X-不合格。如判定為不合格，請填寫異常項目於備註欄，並詳細說明或附上文件/照片。&#13;&#10;   檢驗項目說明：1-外觀  2-顏色  3-氣味  4-夾雜物(病媒)  5-印刷  6-黏合度  7-COA   8-其他 ，驗收有機產品之原料應確認該批次：(a)進口有機農產品同意文件 (b)有機證書有&#13;&#10;   效性 (c)農藥殘留報告 (d)核對原料規格表包裝及標示與實際產品相同。&#13;&#10; (2)內部檢驗：V-合格 X-不合格 N-無須內檢。&#13;&#10; 驗收標準依照A13-08-00-05原物料驗收條件。&#13;&#10;&#13;&#10;&#13;&#10;" VertAlign="Center"/>
       <TextObject Name="Text34" Left="330.75" Top="122.85" Width="538.65" Height="18.9" Text="驗收人員：                主管：              " HorzAlign="Center" VertAlign="Center"/>
     </ReportSummaryBand>
     <PageFooterBand Name="PageFooter1" Top="273.18" Width="1047.06" Height="47.25">
