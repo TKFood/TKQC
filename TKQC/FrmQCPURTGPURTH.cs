@@ -123,7 +123,7 @@ namespace TKQC
             table.SelectCommand = SQL1.ToString();
 
             report1.Preview = previewControl1;
-            report1.Show();
+            report1.Show();  
         }
         #endregion
 
