@@ -96,7 +96,7 @@ namespace TKQC
                             WHERE [TG003]>='{0}' AND [TG003]<='{1}'
                             {2}
 
-                            ORDER BY TG001,TG002,TH003
+                            ORDER BY TG001,TG002,TH003 
                                 
                                 ", SDATES, EDATES, SQLQUERY.ToString());
 
