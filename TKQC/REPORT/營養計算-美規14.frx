@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="12/01/2020 14:43:55" ReportInfo.Modified="01/10/2023 10:47:06" ReportInfo.CreatorVersion="2016.4.4.0">
+  <Dictionary>
+    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqHwzMSgwTFaHpjtG3vsOj8Zy6q+uhwpDsytgWqwZQZyEQUQyQ022aWUGqU90pHzzNjHuzu89K+RQ2LIBVx1fpgNkNJhwC4eetn2/Uy0fMrO7zDUE5AmRb+0bcYI+lxqpNK7VAg28EMb2zujBtCWMs8uR7KE3TT1XHtlPqNg0WX9IJodr2O5u+9qZtveA1iw61">
+      <TableDataSource Name="Table" DataType="System.Int32" Enabled="true" SelectCommand="SELECT [NUTRITIONPRODDETAIL].[ID] AS '序號'&#13;&#10;,[NUTRITIONPROD].[PRODID] AS '成品編號'&#13;&#10;,[NUTRITIONPROD].[PRODNAME] AS '成品名'&#13;&#10;,[NUTRITIONPRODDETAIL].[MB001] AS '原料編號'&#13;&#10;,[NUTRITIONPRODDETAIL].[MB002] AS '原料名'&#13;&#10;,[NUTRITIONPRODDETAIL].[USEDANOUNT] AS '添加量'&#13;&#10;,[NUTRITIONBASE].[CALORIES]*[NUTRITIONPRODDETAIL].[USEDANOUNT] AS '熱量Kcal/100g'&#13;&#10;,[NUTRITIONBASE].[FAT]*[NUTRITIONPRODDETAIL].[USEDANOUNT] AS '脂肪g/100g'&#13;&#10;,[NUTRITIONBASE].[SATURATEDFAT]*[NUTRITIONPRODDETAIL].[USEDANOUNT] AS '飽和脂肪g/100g'&#13;&#10;,[NUTRITIONBASE].[TRANSFAT]*[NUTRITIONPRODDETAIL].[USEDANOUNT] AS '反式脂肪g/100g'&#13;&#10;,[NUTRITIONBASE].[CHOLESTEROL]*[NUTRITIONPRODDETAIL].[USEDANOUNT] AS '膽固醇mg/100g'&#13;&#10;,[NUTRITIONBASE].[SODIUM]*[NUTRITIONPRODDETAIL].[USEDANOUNT] AS '鈉mg/100g'&#13;&#10;,[NUTRITIONBASE].[CARBOHYDRATES]*[NUTRITIONPRODDETAIL].[USEDANOUNT] AS '碳水化合物g/100g'&#13;&#10;,[NUTRITIONBASE].[DIETARYFIBER]*[NUTRITIONPRODDETAIL].[USEDANOUNT] AS '膳食纖維g/100g'&#13;&#10;,[NUTRITIONBASE].[SUGAR]*[NUTRITIONPRODDETAIL].[USEDANOUNT] AS '糖g/100g'&#13;&#10;,[NUTRITIONBASE].[ADDSUGAR]*[NUTRITIONPRODDETAIL].[USEDANOUNT] AS '添加糖g/100g'&#13;&#10;,[NUTRITIONBASE].[PROTEIN]*[NUTRITIONPRODDETAIL].[USEDANOUNT] AS '蛋白質g/100g'&#13;&#10;,[NUTRITIONBASE].[VITANMIND]*[NUTRITIONPRODDETAIL].[USEDANOUNT] AS '維生素D mcg/100g'&#13;&#10;,[NUTRITIONBASE].[CALCIUM]*[NUTRITIONPRODDETAIL].[USEDANOUNT] AS '鈣 mg/100g'&#13;&#10;,[NUTRITIONBASE].[IRON]*[NUTRITIONPRODDETAIL].[USEDANOUNT] AS '鐵mg/100g'&#13;&#10;,[NUTRITIONBASE].[POTASSIUM]*[NUTRITIONPRODDETAIL].[USEDANOUNT] AS '鉀mg/100g'&#13;&#10;FROM [TKQC].[dbo].[NUTRITIONPROD],[TKQC].[dbo].[NUTRITIONPRODDETAIL],[TKQC].[dbo].[NUTRITIONBASE] &#13;&#10;WHERE [NUTRITIONPROD].[PRODID]=[NUTRITIONPRODDETAIL].[PRODID]&#13;&#10;AND [NUTRITIONPRODDETAIL].MB001=[NUTRITIONBASE].MB001&#13;&#10;AND [NUTRITIONPROD].[PRODID]='1'&#13;&#10;ORDER BY [NUTRITIONPRODDETAIL].[MB001]">
+        <Column Name="序號" DataType="System.Int32"/>
+        <Column Name="成品編號" DataType="System.String"/>
+        <Column Name="成品名" DataType="System.String"/>
+        <Column Name="原料編號" DataType="System.String"/>
+        <Column Name="原料名" DataType="System.String"/>
+        <Column Name="添加量" DataType="System.Decimal"/>
+        <Column Name="熱量Kcal/100g" DataType="System.Decimal"/>
+        <Column Name="脂肪g/100g" DataType="System.Decimal"/>
+        <Column Name="飽和脂肪g/100g" DataType="System.Decimal"/>
+        <Column Name="反式脂肪g/100g" DataType="System.Decimal"/>
+        <Column Name="膽固醇mg/100g" DataType="System.Decimal"/>
+        <Column Name="鈉mg/100g" DataType="System.Decimal"/>
+        <Column Name="碳水化合物g/100g" DataType="System.Decimal"/>
+        <Column Name="膳食纖維g/100g" DataType="System.Decimal"/>
+        <Column Name="糖g/100g" DataType="System.Decimal"/>
+        <Column Name="添加糖g/100g" DataType="System.Decimal"/>
+        <Column Name="蛋白質g/100g" DataType="System.Decimal"/>
+        <Column Name="維生素D mcg/100g" DataType="System.Decimal"/>
+        <Column Name="鈣 mg/100g" DataType="System.Decimal"/>
+        <Column Name="鐵mg/100g" DataType="System.Decimal"/>
+        <Column Name="鉀mg/100g" DataType="System.Decimal"/>
+      </TableDataSource>
+    </MsSqlDataConnection>
+    <Total Name="Total添加量" Expression="[Table.添加量]" Evaluator="Data1"/>
+    <Total Name="Total熱量" Expression="[Table.熱量Kcal/100g]" Evaluator="Data1"/>
+    <Total Name="Total脂肪" Expression="[Table.脂肪g/100g]" Evaluator="Data1"/>
+    <Total Name="Total飽和脂肪" Expression="[Table.飽和脂肪g/100g]" Evaluator="Data1"/>
+    <Total Name="Total反式脂肪" Expression="[Table.反式脂肪g/100g]" Evaluator="Data1"/>
+    <Total Name="Total膽固醇" Expression="[Table.膽固醇mg/100g]" Evaluator="Data1"/>
+    <Total Name="Total鈉" Expression="[Table.鈉mg/100g]" Evaluator="Data1"/>
+    <Total Name="Total碳水化合物" Expression="[Table.碳水化合物g/100g]" Evaluator="Data1"/>
+    <Total Name="Total膳食纖維" Expression="[Table.膳食纖維g/100g]" Evaluator="Data1"/>
+    <Total Name="Total糖" Expression="[Table.糖g/100g]" Evaluator="Data1"/>
+    <Total Name="Total添加糖" Expression="[Table.添加糖g/100g]" Evaluator="Data1"/>
+    <Total Name="Total蛋白質" Expression="[Table.蛋白質g/100g]" Evaluator="Data1"/>
+    <Total Name="Total維生素D " Expression="[Table.維生素D mcg/100g]" Evaluator="Data1"/>
+    <Total Name="Total鈣" Expression="[Table.鈣 mg/100g]" Evaluator="Data1"/>
+    <Total Name="Total鐵" Expression="[Table.鐵mg/100g]" Evaluator="Data1"/>
+    <Total Name="Total鉀" Expression="[Table.鉀mg/100g]" Evaluator="Data1"/>
+  </Dictionary>
+  <ReportPage Name="Page1" Landscape="true" PaperWidth="400" PaperHeight="210">
+    <ReportTitleBand Name="ReportTitle1" Width="1436.4" Height="18.9">
+      <TextObject Name="Text1" Width="1436.4" Height="18.9" Text="成品營養標示單-美規14項" HorzAlign="Center" VertAlign="Center"/>
+    </ReportTitleBand>
+    <ColumnHeaderBand Name="ColumnHeader1" Top="23.39" Width="1436.4" Height="37.8">
+      <TextObject Name="Text3" Width="66.15" Height="37.8" Border.Lines="All" Text="成品編號" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text5" Left="66.15" Width="122.85" Height="37.8" Border.Lines="All" Text="成品名" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text7" Left="189" Width="66.15" Height="37.8" Border.Lines="All" Text="原料編號" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text9" Left="255.15" Width="122.85" Height="37.8" Border.Lines="All" Text="原料名" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text11" Left="378" Width="66.15" Height="37.8" Border.Lines="All" Text="添加量" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text13" Left="444.15" Width="66.15" Height="37.8" Border.Lines="All" Text="熱量Kcal/100g" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text15" Left="576.45" Width="66.15" Height="37.8" Border.Lines="All" Text="脂肪g/100g" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text17" Left="642.6" Width="66.15" Height="37.8" Border.Lines="All" Text="飽和脂肪g/100g" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text19" Left="708.75" Width="66.15" Height="37.8" Border.Lines="All" Text="反式脂肪g/100g" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text21" Left="774.9" Width="66.15" Height="37.8" Border.Lines="All" Text="膽固醇mg/100g" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text23" Left="1304.1" Width="66.15" Height="37.8" Border.Lines="All" Text="鈉mg/100g" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text25" Left="841.05" Width="66.15" Height="37.8" Border.Lines="All" Text="碳水化合物g/100g" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text27" Left="973.35" Width="66.15" Height="37.8" Border.Lines="All" Text="膳食纖維g/100g" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text29" Left="907.2" Width="66.15" Height="37.8" Border.Lines="All" Text="糖g/100g" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text35" Left="1039.5" Width="66.15" Height="37.8" Border.Lines="All" Text="維生素D mcg/100g" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text39" Left="1171.8" Width="66.15" Height="37.8" Border.Lines="All" Text="鐵mg/100g" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text37" Left="1105.65" Width="66.15" Height="37.8" Border.Lines="All" Text="鈣 mg/100g" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text41" Left="1237.95" Width="66.15" Height="37.8" Border.Lines="All" Text="鉀mg/100g" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text33" Left="510.3" Width="66.15" Height="37.8" Border.Lines="All" Text="蛋白質g/100g" HorzAlign="Center" VertAlign="Center"/>
+    </ColumnHeaderBand>
+    <DataBand Name="Data1" Top="65.69" Width="1436.4" Height="18.9" CanGrow="true" DataSource="Table">
+      <TextObject Name="Text2" Width="66.15" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.成品編號]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="6" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text4" Left="66.15" Width="122.85" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.成品名]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="6" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" VertAlign="Center"/>
+      <TextObject Name="Text6" Left="189" Width="66.15" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.原料編號]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="6" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text8" Left="255.15" Width="122.85" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.原料名]" VertAlign="Center"/>
+      <TextObject Name="Text10" Left="378" Width="66.15" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.添加量]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="6" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" WordWrap="false" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Text12" Left="444.15" Width="66.15" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.熱量Kcal/100g]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="6" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" WordWrap="false" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Text14" Left="576.45" Width="66.15" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.脂肪g/100g]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="6" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" WordWrap="false" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Text16" Left="642.6" Width="66.15" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.飽和脂肪g/100g]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="6" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" WordWrap="false" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Text18" Left="708.75" Width="66.15" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.反式脂肪g/100g]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="6" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" WordWrap="false" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Text20" Left="774.9" Width="66.15" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.膽固醇mg/100g]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="6" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" WordWrap="false" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Text22" Left="1304.1" Width="66.15" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.鈉mg/100g]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="6" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" WordWrap="false" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Text24" Left="841.05" Width="66.15" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.碳水化合物g/100g]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="6" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" WordWrap="false" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Text26" Left="973.35" Width="66.15" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.膳食纖維g/100g]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="6" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" WordWrap="false" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Text28" Left="907.2" Width="66.15" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.糖g/100g]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="6" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" WordWrap="false" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Text34" Left="1039.5" Width="66.15" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.維生素D mcg/100g]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="6" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" WordWrap="false" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Text38" Left="1171.8" Width="66.15" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.鐵mg/100g]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="6" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" WordWrap="false" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Text36" Left="1105.65" Width="66.15" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.鈣 mg/100g]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="6" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" WordWrap="false" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Text40" Left="1237.95" Width="66.15" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.鉀mg/100g]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="6" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" WordWrap="false" Trimming="EllipsisCharacter"/>
+      <TextObject Name="Text32" Left="510.3" Width="66.15" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.蛋白質g/100g]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="6" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center" WordWrap="false" Trimming="EllipsisCharacter"/>
+    </DataBand>
+    <ReportSummaryBand Name="ReportSummary1" Top="89.08" Width="1436.4" Height="37.8">
+      <TextObject Name="Text42" Width="378" Height="37.8" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="合計" Format="Number" Format.UseLocale="false" Format.DecimalDigits="6" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text43" Left="378" Width="66.15" Height="37.8" Border.Lines="All" Text="[Total添加量]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="6" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center"/>
+      <TextObject Name="Text44" Left="444.15" Width="66.15" Height="37.8" Border.Lines="All" Text="[Total熱量]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="6" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center"/>
+      <TextObject Name="Text45" Left="576.45" Width="66.15" Height="37.8" Border.Lines="All" Text="[Total脂肪]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="6" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center"/>
+      <TextObject Name="Text46" Left="642.6" Width="66.15" Height="37.8" Border.Lines="All" Text="[Total飽和脂肪]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="6" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center"/>
+      <TextObject Name="Text47" Left="708.75" Width="66.15" Height="37.8" Border.Lines="All" Text="[Total反式脂肪]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="6" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center"/>
+      <TextObject Name="Text48" Left="774.9" Width="66.15" Height="37.8" Border.Lines="All" Text="[Total膽固醇]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="6" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center"/>
+      <TextObject Name="Text49" Left="1304.1" Width="66.15" Height="37.8" Border.Lines="All" Text="[Total鈉]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="6" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center"/>
+      <TextObject Name="Text50" Left="841.05" Width="66.15" Height="37.8" Border.Lines="All" Text="[Total碳水化合物]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="6" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center"/>
+      <TextObject Name="Text51" Left="973.35" Width="66.15" Height="37.8" Border.Lines="All" Text="[Total膳食纖維]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="6" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center"/>
+      <TextObject Name="Text52" Left="907.2" Width="66.15" Height="37.8" Border.Lines="All" Text="[Total糖]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="6" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center"/>
+      <TextObject Name="Text55" Left="1039.5" Width="66.15" Height="37.8" Border.Lines="All" Text="[Total維生素D ]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="6" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center"/>
+      <TextObject Name="Text56" Left="1105.65" Width="66.15" Height="37.8" Border.Lines="All" Text="[Total鈣]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="6" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center"/>
+      <TextObject Name="Text57" Left="1171.8" Width="66.15" Height="37.8" Border.Lines="All" Text="[Total鐵]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="6" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center"/>
+      <TextObject Name="Text58" Left="1237.95" Width="66.15" Height="37.8" Border.Lines="All" Text="[Total鉀]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="6" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center"/>
+      <TextObject Name="Text54" Left="510.3" Width="66.15" Height="37.8" Border.Lines="All" Text="[Total蛋白質]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="6" Format.DecimalSeparator="." Format.GroupSeparator="," Format.NegativePattern="1" HorzAlign="Right" VertAlign="Center"/>
+    </ReportSummaryBand>
+  </ReportPage>
+</Report>
