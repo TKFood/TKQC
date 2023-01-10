@@ -1620,7 +1620,7 @@ namespace TKQC
                             ORDER BY [NUTRITIONPRODDETAIL].[MB001]
                             ", PRODID);
 
-               
+                
 
             return SB;
 
