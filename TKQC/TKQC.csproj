@@ -136,6 +136,12 @@
     <Compile Include="FrmREPORTQC.Designer.cs">
       <DependentUpon>FrmREPORTQC.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmREPORTQC1001.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmREPORTQC1001.Designer.cs">
+      <DependentUpon>FrmREPORTQC1001.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmREPORTQC1002.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -180,6 +186,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmREPORTQC.resx">
       <DependentUpon>FrmREPORTQC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmREPORTQC1001.resx">
+      <DependentUpon>FrmREPORTQC1001.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmREPORTQC1002.resx">
       <DependentUpon>FrmREPORTQC1002.cs</DependentUpon>
