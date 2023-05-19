@@ -1709,6 +1709,17 @@ namespace TKQC
 
         }
 
+        private void comboBox5_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if(!string.IsNullOrEmpty(comboBox5.SelectedValue.ToString()))
+                {
+                    textBox3.Text = comboBox5.SelectedValue.ToString();
+                }
+            }
+            catch { }
+        }
         #endregion
 
         #region BUTTON
@@ -1842,8 +1853,9 @@ namespace TKQC
         }
 
 
+
         #endregion
 
-
+       
     }
 }
