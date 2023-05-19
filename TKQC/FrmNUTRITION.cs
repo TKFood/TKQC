@@ -1303,8 +1303,21 @@ namespace TKQC
         }
         private void comboBox7_SelectedIndexChanged(object sender, EventArgs e)
         {
-            textBox11.Text = comboBox7.SelectedValue.ToString();
-            textBox12.Text = null;
+            try
+            {
+                if (!string.IsNullOrEmpty(comboBox7.SelectedValue.ToString()))
+                {
+                    textBox11.Text = comboBox7.SelectedValue.ToString();
+                    textBox12.Text = null;
+
+                }
+            }
+            catch
+            {
+
+            }
+           
+           
         }
 
         public void ADDNUTRITIONPRODDETAIL(string ID, string PRODID, string PRODNAME, string MB001, string MB002,decimal USEDANOUNT)
