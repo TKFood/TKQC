@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="08/25/2023 10:44:40" ReportInfo.Modified="08/25/2023 10:48:42" ReportInfo.CreatorVersion="2016.4.4.0">
+  <Dictionary>
+    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqkA5xuhKHB3CLop8XYPYRClsBdj2Jy+GOmOtzgnQrH7KN0McfeTWAYRXzAMfcORNu9sLYfN/7+0ky/XU3ASh5rFe8/gutZ6+u12aj3VXwxfQlJk90Rht7YVpw2hJ62C0Peklo3ciZZZfJn38wf1hGVwoq3IekVXyykeJD7yay31FLbjzTYZqnc1opTE6zMHu+IOzU0i7xHxtnxkSVVYuVWA==">
+      <TableDataSource Name="Table" DataType="System.Int32" Enabled="true" SelectCommand="&#13;&#10;SELECT CONVERT(NVARCHAR,[開始時間],112) AS '日期'&#13;&#10;,[Machine].[區域]&#13;&#10;,[alarm_table].[機台名稱],[alarm_table].[警報名稱],COUNT([alarm_table].[NO]) AS '警報次數'&#13;&#10;,CONVERT(decimal(16,2),COUNT([alarm_table].[NO])*3/60) AS '警報持續時間(分)'&#13;&#10;FROM [TK_FOOD].[dbo].[alarm_table]&#13;&#10;LEFT JOIN [TK_FOOD].[dbo].[Machine] ON [Machine].[機台名稱]= [alarm_table].[機台名稱]&#13;&#10;WHERE CONVERT(NVARCHAR,[開始時間],112)='20230824'&#13;&#10;GROUP BY CONVERT(NVARCHAR,[開始時間],112),[Machine].[區域],[alarm_table].[機台名稱],[警報名稱]&#13;&#10;ORDER BY COUNT([alarm_table].[NO]) DESC">
+        <Column Name="日期" DataType="System.String"/>
+        <Column Name="區域" DataType="System.String"/>
+        <Column Name="機台名稱" DataType="System.String"/>
+        <Column Name="警報名稱" DataType="System.String"/>
+        <Column Name="警報次數" DataType="System.Int32"/>
+        <Column Name="警報持續時間(分)" DataType="System.Decimal"/>
+      </TableDataSource>
+    </MsSqlDataConnection>
+  </Dictionary>
+  <ReportPage Name="Page1">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="18.9">
+      <TextObject Name="Text1" Width="699.3" Height="18.9" Text="溫溼度警報"/>
+    </ReportTitleBand>
+    <PageHeaderBand Name="PageHeader1" Top="23.5" Width="718.2" Height="18.9">
+      <TextObject Name="Text3" Width="94.5" Height="18.9" Border.Lines="All" Text="日期" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text5" Left="94.5" Width="160.65" Height="18.9" Border.Lines="All" Text="區域" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text7" Left="255.15" Width="160.65" Height="18.9" Border.Lines="All" Text="機台名稱" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text9" Left="415.8" Width="94.5" Height="18.9" Border.Lines="All" Text="警報名稱" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text11" Left="510.3" Width="94.5" Height="18.9" Border.Lines="All" Text="警報次數" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text13" Left="604.8" Width="113.4" Height="18.9" Border.Lines="All" Text="警報持續時間(分)" HorzAlign="Center" VertAlign="Center"/>
+    </PageHeaderBand>
+    <DataBand Name="Data1" Top="47" Width="718.2" Height="18.9" CanGrow="true" DataSource="Table">
+      <TextObject Name="Text2" Width="94.5" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.日期]" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text4" Left="94.5" Width="160.65" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.區域]" VertAlign="Center"/>
+      <TextObject Name="Text6" Left="255.15" Width="160.65" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.機台名稱]" VertAlign="Center"/>
+      <TextObject Name="Text8" Left="415.8" Width="94.5" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.警報名稱]" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text10" Left="510.3" Width="94.5" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.警報次數]" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text12" Left="604.8" Width="113.4" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.警報持續時間(分)]" Format="Number" Format.UseLocale="true" HorzAlign="Right" VertAlign="Center" WordWrap="false" Trimming="EllipsisCharacter"/>
+    </DataBand>
+    <PageFooterBand Name="PageFooter1" Top="70.49" Width="718.2" Height="18.9"/>
+  </ReportPage>
+</Report>
