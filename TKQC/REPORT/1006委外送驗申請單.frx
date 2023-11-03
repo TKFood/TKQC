@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="11/03/2023 11:34:20" ReportInfo.Modified="11/03/2023 13:41:58" ReportInfo.CreatorVersion="2016.4.4.0">
+  <Dictionary>
+    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqHwzMSgwTFaHpjtG3vsOj8Zy6q+uhwpDsytgWqwZQZyEQUQyQ022aWUGqU90pHzzNjHuzu89K+RQ2LIBVx1fpgNkNJhwC4eetn2/Uy0fMrO7zDUE5AmRb+0bcYI+lxqpN+i5gA3VDGcwlcfm6L9ZMsLrZ3U+wEDtHCQtd9vw2XUHs/7VIZeFrvBOjhAFAVV+d">
+      <TableDataSource Name="Table" DataType="System.Int32" Enabled="true" SelectCommand="/****** SSMS 中 SelectTopNRows 命令的指令碼  ******/&#13;&#10;SELECT &#13;&#10;[DOC_NBR] AS 'DOC_NBR'&#13;&#10;,[QCFrm004SN] AS '表單編號'&#13;&#10;,[QCFrm004Date] AS '申請日期'&#13;&#10;,[QCFrm004UserLevel] AS '申請者職級'&#13;&#10;,[QC6001] AS '交付人'&#13;&#10;,[QC6002] AS '交付人部門'&#13;&#10;,[QC6012] AS '接辦人'&#13;&#10;,[QC6003] AS '交辦原因'&#13;&#10;,[QC6004] AS '案件類別'&#13;&#10;,[QC6005] AS '特殊需求'&#13;&#10;,[QC6006] AS '指定單位'&#13;&#10;,[QC6007] AS '檢驗需求'&#13;&#10;,[QC6008] AS '品保寄件日期'&#13;&#10;,[QC6009] AS '檢驗單位報價'&#13;&#10;,[QC60010] AS '報告預計交期'&#13;&#10;FROM [TKQC].[dbo].[TBUOFQC1006]">
+        <Column Name="DOC_NBR" DataType="System.String"/>
+        <Column Name="表單編號" DataType="System.String"/>
+        <Column Name="申請日期" DataType="System.String"/>
+        <Column Name="申請者職級" DataType="System.String"/>
+        <Column Name="交付人" DataType="System.String"/>
+        <Column Name="交付人部門" DataType="System.String"/>
+        <Column Name="接辦人" DataType="System.String"/>
+        <Column Name="交辦原因" DataType="System.String"/>
+        <Column Name="案件類別" DataType="System.String"/>
+        <Column Name="特殊需求" DataType="System.String"/>
+        <Column Name="指定單位" DataType="System.String"/>
+        <Column Name="檢驗需求" DataType="System.String"/>
+        <Column Name="品保寄件日期" DataType="System.String"/>
+        <Column Name="檢驗單位報價" DataType="System.String"/>
+        <Column Name="報告預計交期" DataType="System.String"/>
+      </TableDataSource>
+    </MsSqlDataConnection>
+  </Dictionary>
+  <ReportPage Name="Page1" Landscape="true" PaperWidth="600" PaperHeight="210">
+    <ReportTitleBand Name="ReportTitle1" Width="2192.4" Height="18.9">
+      <TextObject Name="Text1" Width="340.2" Height="18.9" Text="1006委外送驗申請單"/>
+    </ReportTitleBand>
+    <PageHeaderBand Name="PageHeader1" Top="23.5" Width="2192.4" Height="18.9">
+      <TextObject Name="Text3" Width="151.2" Height="18.9" Border.Lines="All" Text="表單編號" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text5" Left="151.2" Width="94.5" Height="18.9" Border.Lines="All" Text="申請日期" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text7" Left="245.7" Width="170.1" Height="18.9" Border.Lines="All" Text="交付人" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text9" Left="415.8" Width="94.5" Height="18.9" Border.Lines="All" Text="交付人部門" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text11" Left="510.3" Width="189" Height="18.9" Border.Lines="All" Text="接辦人" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text13" Left="699.3" Width="604.8" Height="18.9" Border.Lines="All" Text="交辦原因" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text15" Left="1304.1" Width="94.5" Height="18.9" Border.Lines="All" Text="案件類別" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text17" Left="1398.6" Width="94.5" Height="18.9" Border.Lines="All" Text="特殊需求" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text19" Left="1493.1" Width="94.5" Height="18.9" Border.Lines="All" Text="指定單位" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text21" Left="1587.6" Width="321.3" Height="18.9" Border.Lines="All" Text="檢驗需求" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text23" Left="1908.9" Width="94.5" Height="18.9" Border.Lines="All" Text="品保寄件日期" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text25" Left="2003.4" Width="94.5" Height="18.9" Border.Lines="All" Text="檢驗單位報價" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text27" Left="2097.9" Width="94.5" Height="18.9" Border.Lines="All" Text="報告預計交期" HorzAlign="Center" VertAlign="Center"/>
+    </PageHeaderBand>
+    <DataBand Name="Data1" Top="47" Width="2192.4" Height="18.9" CanGrow="true" DataSource="Table">
+      <TextObject Name="Text2" Width="151.2" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.表單編號]" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text4" Left="151.2" Width="94.5" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.申請日期]" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text6" Left="245.7" Width="170.1" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.交付人]" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text8" Left="415.8" Width="94.5" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.交付人部門]" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text10" Left="510.3" Width="189" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.接辦人]" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text12" Left="699.3" Width="604.8" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.交辦原因]" VertAlign="Center"/>
+      <TextObject Name="Text14" Left="1304.1" Width="94.5" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.案件類別]" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text16" Left="1398.6" Width="94.5" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.特殊需求]" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text18" Left="1493.1" Width="94.5" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.指定單位]" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text20" Left="1587.6" Width="321.3" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.檢驗需求]" VertAlign="Center"/>
+      <TextObject Name="Text22" Left="1908.9" Width="94.5" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.品保寄件日期]" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text24" Left="2003.4" Width="94.5" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.檢驗單位報價]" HorzAlign="Center" VertAlign="Center"/>
+      <TextObject Name="Text26" Left="2097.9" Width="94.5" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.報告預計交期]" HorzAlign="Center" VertAlign="Center"/>
+    </DataBand>
+    <PageFooterBand Name="PageFooter1" Top="70.49" Width="2192.4"/>
+  </ReportPage>
+</Report>
