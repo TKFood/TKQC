@@ -53,7 +53,7 @@ namespace TKQC
 
         public void SETFASTREPORT(string SDATES, string EDATES)
         {
-
+             
 
             StringBuilder SQL1 = new StringBuilder();
 
