@@ -101,7 +101,7 @@ namespace TKQC
                                 ", SDATES, EDATES, SQLQUERY.ToString());
 
             Report report1 = new Report();
-            report1.Load(@"REPORT\原物料品質驗收單UOF.frx");
+            report1.Load(@"REPORT\原物料品質驗收單UOFV2.frx"); 
 
             //20210902密
             Class1 TKID = new Class1();//用new 建立類別實體
