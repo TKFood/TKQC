@@ -152,7 +152,7 @@ namespace TKQC
 
             StringBuilder SQL1 = new StringBuilder();
 
-            SQL1 = SETSQL2(SDATES, EDATES);
+            SQL1 = SETSQL2(SDATES, EDATES); 
             Report report1 = new Report();
             report1.Load(@"REPORT\1002.客訴異常處理單明細.frx");
 
