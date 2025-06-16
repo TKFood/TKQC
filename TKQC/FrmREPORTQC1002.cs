@@ -62,7 +62,7 @@ namespace TKQC
             dateTimePicker1.Value = firstDayOfMonth;
             dateTimePicker3.Value = firstDayOfMonth;
             dateTimePicker2.Value = lastDayOfMonth;
-            dateTimePicker4.Value = lastDayOfMonth;
+            dateTimePicker4.Value = lastDayOfMonth; 
         }
         public void SETFASTREPORT(string SDATES, string EDATES)
         {
