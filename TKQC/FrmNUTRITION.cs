@@ -211,7 +211,7 @@ namespace TKQC
         }
 
 
-        public void SEARCHNUTRITIONBASE(string TYPE)
+        public void SEARCHNUTRITIONBASE(string TYPE,string MB001)
         {
             SqlDataAdapter adapter1 = new SqlDataAdapter();
             SqlCommandBuilder sqlCmdBuilder1 = new SqlCommandBuilder();
@@ -230,7 +230,16 @@ namespace TKQC
                 String connectionString;
                 sqlConn = new SqlConnection(sqlsb.ConnectionString);
 
+                StringBuilder QUERY1 = new StringBuilder();
 
+                if(!string.IsNullOrEmpty(MB001))
+                {
+                    QUERY1.AppendFormat(@" AND ([MB001] LIKE '%{0}%' OR [MB002] LIKE '%{0}%') ", MB001);
+                }
+                else
+                {
+                    QUERY1.AppendFormat(@"");
+                }
 
                 sbSql.Clear();
 
@@ -258,8 +267,9 @@ namespace TKQC
                                     ,[ID]
                                     FROM [TKQC].[dbo].[NUTRITIONBASE]
                                     WHERE [TYPE]='{0}'
+                                    {1}
                                     ORDER BY ID
-                                    ", TYPE);
+                                    ", TYPE, QUERY1.ToString());
 
                 adapter1 = new SqlDataAdapter(@"" + sbSql, sqlConn);
 
@@ -1731,7 +1741,7 @@ namespace TKQC
         #region BUTTON
         private void button1_Click(object sender, EventArgs e)
         {
-            SEARCHNUTRITIONBASE(comboBox1.Text.Trim());
+            SEARCHNUTRITIONBASE(comboBox1.Text.Trim(),textBox15.Text);
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -1744,7 +1754,7 @@ namespace TKQC
             UPDATENUTRITIONBASE(ID,comboBox2.Text ,textBox211.Text.Trim(),textBox212.Text,Convert.ToDecimal(textBox221.Text),Convert.ToDecimal(textBox222.Text),Convert.ToDecimal(textBox223.Text),Convert.ToDecimal(textBox224.Text),Convert.ToDecimal(textBox231.Text),Convert.ToDecimal(textBox232.Text),Convert.ToDecimal(textBox233.Text),Convert.ToDecimal(textBox234.Text),Convert.ToDecimal(textBox241.Text),Convert.ToDecimal(textBox242.Text),Convert.ToDecimal(textBox243.Text),Convert.ToDecimal(textBox244.Text),Convert.ToDecimal(textBox251.Text),Convert.ToDecimal(textBox252.Text),Convert.ToDecimal(textBox253.Text));
             SETTEXTBOXREADONLY2();
 
-            SEARCHNUTRITIONBASE(comboBox1.Text.Trim());
+            SEARCHNUTRITIONBASE(comboBox1.Text.Trim(), textBox15.Text);
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -1753,7 +1763,7 @@ namespace TKQC
             if (dialogResult == DialogResult.Yes)
             {
                 DELNUTRITIONBASE(ID);
-                SEARCHNUTRITIONBASE(comboBox1.Text.Trim());
+                SEARCHNUTRITIONBASE(comboBox1.Text.Trim(), textBox15.Text);
             }
             else if (dialogResult == DialogResult.No)
             {
@@ -1775,7 +1785,7 @@ namespace TKQC
                 SETTEXTBOXNULL2();
 
                 SETTEXTBOXREADONLY4();
-                SEARCHNUTRITIONBASE(comboBox1.Text.Trim());
+                SEARCHNUTRITIONBASE(comboBox1.Text.Trim(), textBox15.Text);
             }
             else
             {
