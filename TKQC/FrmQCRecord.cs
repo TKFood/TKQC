@@ -8,9 +8,9 @@ using NPOI.SS.UserModel;
 using System.Configuration;
 using NPOI.XSSF.UserModel;
 using NPOI.SS.Util;
-using DocumentFormat.OpenXml;
+
 using System.Collections.Generic;
-using Aspose.Words;
+
 using TKITDLL;
 
 namespace TKQC
@@ -147,86 +147,86 @@ namespace TKQC
 
         public void PRINTDOC()
         {
-            // 首先把建立的範本檔案讀入MemoryStream
-            //首先把建立的範本檔案讀入MemoryStream
-            System.IO.MemoryStream _memoryStream = new System.IO.MemoryStream(Properties.Resources.品質異常處理單);
+            //// 首先把建立的範本檔案讀入MemoryStream
+            ////首先把建立的範本檔案讀入MemoryStream
+            //System.IO.MemoryStream _memoryStream = new System.IO.MemoryStream(Properties.Resources.品質異常處理單);
 
-            //建立一個Document物件
-            //並傳入MemoryStream
-            Aspose.Words.Document doc = new Aspose.Words.Document(_memoryStream);
+            ////建立一個Document物件
+            ////並傳入MemoryStream
+            //Aspose.Words.Document doc = new Aspose.Words.Document(_memoryStream);
 
-            //新增一個DataTable
-            DataTable table = new DataTable();
-            //建立Column
-            table.Columns.Add("QCNO");
-            table.Columns.Add("name");
-            table.Columns.Add("QCDATE");
-            table.Columns.Add("TEL");
-            table.Columns.Add("Address");
-            table.Columns.Add("MB001");
-            table.Columns.Add("LOTNO");
-            table.Columns.Add("MANU");
-            table.Columns.Add("TYPE");
-            table.Columns.Add("STATUS");
-            table.Columns.Add("PROCESS");
-            table.Columns.Add("REASON");
-            table.Columns.Add("PROTECT");
-            table.Columns.Add("RESULT");
-
-
-
-            //透過建立的DataTable物件來New一個儲存資料的Row
-            DataRow row = table.NewRow();
-            //這些Row具有上面所建立相同的Column欄位
-            //因此可以直接指定欄位名稱將資料填入裡面       
-            row["QCNO"] = textBox1.Text.ToString();
-            row["name"] = textBox2.Text.ToString() + textBox3.Text.ToString() + textBox4.Text.ToString();
-            row["QCDATE"] = dateTimePicker1.Value.ToString("yyyy/MM/dd");
-            row["TEL"] = textBox5.Text.ToString();
-            row["Address"] = textBox6.Text.ToString();
-            row["MB001"] = textBox7.Text.ToString() + textBox8.Text.ToString() + textBox9.Text.ToString();
-            row["LOTNO"] = textBox10.Text.ToString();
-            row["MANU"] = textBox11.Text.ToString();
-            row["TYPE"] = textBox12.Text.ToString();
-            row["STATUS"] = textBox13.Text.ToString();
-            row["PROCESS"] = textBox14.Text.ToString();
-            row["REASON"] = textBox15.Text.ToString();
-            row["PROTECT"] = textBox16.Text.ToString();
-            row["RESULT"] = textBox17.Text.ToString();
-
-            //把所建立的資料行加入Table的Row清單內
-            table.Rows.Add(row);
+            ////新增一個DataTable
+            //DataTable table = new DataTable();
+            ////建立Column
+            //table.Columns.Add("QCNO");
+            //table.Columns.Add("name");
+            //table.Columns.Add("QCDATE");
+            //table.Columns.Add("TEL");
+            //table.Columns.Add("Address");
+            //table.Columns.Add("MB001");
+            //table.Columns.Add("LOTNO");
+            //table.Columns.Add("MANU");
+            //table.Columns.Add("TYPE");
+            //table.Columns.Add("STATUS");
+            //table.Columns.Add("PROCESS");
+            //table.Columns.Add("REASON");
+            //table.Columns.Add("PROTECT");
+            //table.Columns.Add("RESULT");
 
 
-            //將DataTable傳入Document的MailMerge.Execute()方法
-            doc.MailMerge.Execute(table);
-            //清空所有未被合併的功能變數
-            doc.MailMerge.DeleteFields();
 
-            if (Directory.Exists(@"c:\temp\"))
-            {
-                //資料夾存在
-            }
-            else
-            {
-                //新增資料夾
-                Directory.CreateDirectory(@"c:\temp\");
-            }
-            //將檔案儲存至c:\
-            StringBuilder filename = new StringBuilder();
-            filename.AppendFormat(@"c:\temp\品質異常處理單{0}.doc", DateTime.Now.ToString("yyyyMMdd"));
-            doc.Save(filename.ToString());
+            ////透過建立的DataTable物件來New一個儲存資料的Row
+            //DataRow row = table.NewRow();
+            ////這些Row具有上面所建立相同的Column欄位
+            ////因此可以直接指定欄位名稱將資料填入裡面       
+            //row["QCNO"] = textBox1.Text.ToString();
+            //row["name"] = textBox2.Text.ToString() + textBox3.Text.ToString() + textBox4.Text.ToString();
+            //row["QCDATE"] = dateTimePicker1.Value.ToString("yyyy/MM/dd");
+            //row["TEL"] = textBox5.Text.ToString();
+            //row["Address"] = textBox6.Text.ToString();
+            //row["MB001"] = textBox7.Text.ToString() + textBox8.Text.ToString() + textBox9.Text.ToString();
+            //row["LOTNO"] = textBox10.Text.ToString();
+            //row["MANU"] = textBox11.Text.ToString();
+            //row["TYPE"] = textBox12.Text.ToString();
+            //row["STATUS"] = textBox13.Text.ToString();
+            //row["PROCESS"] = textBox14.Text.ToString();
+            //row["REASON"] = textBox15.Text.ToString();
+            //row["PROTECT"] = textBox16.Text.ToString();
+            //row["RESULT"] = textBox17.Text.ToString();
 
-            MessageBox.Show("匯出完成-文件放在-" + filename.ToString());
-            FileInfo fi = new FileInfo(filename.ToString());
-            if (fi.Exists)
-            {
-                System.Diagnostics.Process.Start(filename.ToString());
-            }
-            else
-            {
-                //file doesn't exist
-            }
+            ////把所建立的資料行加入Table的Row清單內
+            //table.Rows.Add(row);
+
+
+            ////將DataTable傳入Document的MailMerge.Execute()方法
+            //doc.MailMerge.Execute(table);
+            ////清空所有未被合併的功能變數
+            //doc.MailMerge.DeleteFields();
+
+            //if (Directory.Exists(@"c:\temp\"))
+            //{
+            //    //資料夾存在
+            //}
+            //else
+            //{
+            //    //新增資料夾
+            //    Directory.CreateDirectory(@"c:\temp\");
+            //}
+            ////將檔案儲存至c:\
+            //StringBuilder filename = new StringBuilder();
+            //filename.AppendFormat(@"c:\temp\品質異常處理單{0}.doc", DateTime.Now.ToString("yyyyMMdd"));
+            //doc.Save(filename.ToString());
+
+            //MessageBox.Show("匯出完成-文件放在-" + filename.ToString());
+            //FileInfo fi = new FileInfo(filename.ToString());
+            //if (fi.Exists)
+            //{
+            //    System.Diagnostics.Process.Start(filename.ToString());
+            //}
+            //else
+            //{
+            //    //file doesn't exist
+            //}
 
         }
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
