@@ -52,18 +52,28 @@ namespace TKQC
 
         #region FUNCTION     
 
-        public void SETFASTREPORT(string SDATES, string EDATES,string NO)
+        public void SETFASTREPORT(string SDATES, string EDATES,string KINDS,string NO)
         {
             StringBuilder SQL1 = new StringBuilder();
-            StringBuilder SQLQUERY = new StringBuilder();
-             
-            if(!string.IsNullOrEmpty(NO))
+            StringBuilder SQLQUERY1 = new StringBuilder();
+            StringBuilder SQLQUERY2 = new StringBuilder();
+
+            if (!string.IsNullOrEmpty(NO))
             {
-                SQLQUERY.AppendFormat(@"  AND 單號 LIKE '%{0}%' ", NO);
+                SQLQUERY1.AppendFormat(@"  AND 單別 LIKE '%{0}%' ", KINDS);
             }
             else
             {
-                SQLQUERY.AppendFormat(@" ");
+                SQLQUERY1.AppendFormat(@" ");
+            }
+
+            if (!string.IsNullOrEmpty(NO))
+            {
+                SQLQUERY2.AppendFormat(@"  AND 單號 LIKE '%{0}%' ", NO);
+            }
+            else
+            {
+                SQLQUERY2.AppendFormat(@" ");
             }
 
             SQL1.AppendFormat(@"  
@@ -97,8 +107,9 @@ namespace TKQC
                             ) AS TEMP
                             WHERE 1=1
                             {2}
+                            {3}
                                 
-                                ", SDATES, EDATES, SQLQUERY.ToString());
+                                ", SDATES, EDATES, SQLQUERY1.ToString(), SQLQUERY2.ToString());
 
             Report report1 = new Report();
             report1.Load(@"REPORT\品質判定報告.frx");
@@ -131,7 +142,7 @@ namespace TKQC
 
         private void button4_Click(object sender, EventArgs e)
         {
-            SETFASTREPORT(dateTimePicker1.Value.ToString("yyyyMMdd"), dateTimePicker2.Value.ToString("yyyyMMdd"),textBox1.Text.Trim());
+            SETFASTREPORT(dateTimePicker1.Value.ToString("yyyyMMdd"), dateTimePicker2.Value.ToString("yyyyMMdd"),textBox1.Text.Trim(), textBox2.Text.Trim());
         }
         #endregion
     }
